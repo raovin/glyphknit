@@ -3,6 +3,8 @@ import type { MetadataRoute } from "next";
 import { projects } from "@/content/projects/projects";
 import { siteConfig } from "@/content/site";
 
+export const dynamic = "force-static";
+
 const staticRoutes = [
   "/",
   "/work",

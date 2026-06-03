@@ -13,7 +13,7 @@ export function buildMetadata({
   title,
   description,
   path = "/",
-  image = "/opengraph-image"
+  image = "/og/glyphknit-og.svg"
 }: MetadataInput): Metadata {
   const pageTitle = title
     ? `${title} | ${siteConfig.name} - ${siteConfig.primaryTitle}`

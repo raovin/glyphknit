@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Vin Rao portfolio preview</title>
+  <desc id="desc">GlyphKnit portfolio preview for Vin Rao, Senior SDET and ML Quality Engineer.</desc>
+  <rect width="1200" height="630" fill="#090b0c"/>
+  <rect x="70" y="70" width="159" height="57" rx="6" fill="none" stroke="#2f9b90" stroke-width="2"/>
+  <text x="92" y="107" fill="#65c9bc" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">GlyphKnit</text>
+  <text x="72" y="365" fill="#65c9bc" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Senior SDET / ML Quality Engineer</text>
+  <text x="72" y="455" fill="#f4f8f6" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="800">Vin Rao</text>
+  <text x="72" y="522" fill="#9ba9a6" font-family="Arial, Helvetica, sans-serif" font-size="34">Test automation, API validation, CI/CD testing,</text>
+  <text x="72" y="568" fill="#9ba9a6" font-family="Arial, Helvetica, sans-serif" font-size="34">data validation, and MLOps quality.</text>
+</svg>

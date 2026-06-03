@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Vin Rao",
   primaryTitle: "Senior SDET / ML Quality Engineer",
   domain: "glyphknit.com",
-  canonicalUrl: "https://glyphknit.com",
+  canonicalUrl: "http://glyphknit.com",
   email: "3vineeth@gmail.com",
   githubUrl: "https://github.com/raovin",
   linkedinUrl: "https://linkedin.rao.vin/",

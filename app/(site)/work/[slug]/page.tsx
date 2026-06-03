@@ -21,6 +21,8 @@ const sampleGate = `{
   "output": "reports/readiness-report.json"
 }`;
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }

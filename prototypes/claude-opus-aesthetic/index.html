@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GlyphKnit Solutions — Forward-deployed engineering</title>
+<meta name="description" content="Vin Rao — freelance software developer and forward-deployed engineer. Internal tools, automation, cloud/API integrations, test infrastructure, and AI-assisted delivery." />
+<style>
+  /* ============================================================
+     GlyphKnit Solutions — aesthetic prototype (Claude / Opus lane)
+     Standalone. No external assets, no CDN, no fonts fetched.
+     System font stacks only.
+     ============================================================ */
+
+  :root {
+    /* Ink + paper */
+    --ink-900: #0a0b0d;
+    --ink-850: #0f1115;
+    --ink-800: #14171c;
+    --ink-700: #1b1f26;
+    --ink-600: #262b34;
+    --line:    #2a2f39;
+    --line-soft: rgba(255,255,255,0.06);
+
+    /* Text */
+    --paper:   #f4f1ea;   /* warm off-white */
+    --text:    #d9d6ce;
+    --muted:   #9a9690;
+    --faint:   #6c6862;
+
+    /* Accent — warm copper/amber, restrained */
+    --amber:   #e0a35e;
+    --amber-bright: #f0b773;
+    --amber-deep:   #b97e3f;
+    --glow:    rgba(224,163,94,0.16);
+
+    /* Cool secondary for technical contrast */
+    --cyan:    #7fb6c4;
+
+    --ok:      #6fb48a;
+
+    /* Type */
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Consolas", "Liberation Mono", monospace;
+
+    --maxw: 1180px;
+    --gutter: clamp(20px, 5vw, 64px);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--ink-900);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--amber); color: var(--ink-900); }
+
+  /* Subtle page texture: hairline grid + warm vignette */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(120% 80% at 50% -10%, rgba(224,163,94,0.10), transparent 55%),
+      radial-gradient(80% 60% at 100% 0%, rgba(127,182,196,0.05), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--gutter); position: relative; z-index: 1; }
+
+  /* ---------- Shared typographic atoms ---------- */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--amber);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 26px; height: 1px;
+    background: linear-gradient(90deg, var(--amber), transparent);
+  }
+  .section-index {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--faint);
+  }
+  h1, h2, h3 { color: var(--paper); font-weight: 600; letter-spacing: -0.02em; line-height: 1.08; margin: 0; }
+  h2.section-title {
+    font-size: clamp(28px, 4vw, 44px);
+    margin-top: 14px;
+    max-width: 18ch;
+  }
+  p { margin: 0 0 1em; }
+  .lede { color: var(--muted); font-size: clamp(16px, 1.6vw, 19px); max-width: 60ch; }
+
+  .mono { font-family: var(--mono); }
+
+  /* ---------- Top bar ---------- */
+  header.nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(10px);
+    background: linear-gradient(var(--ink-900), rgba(10,11,13,0.72));
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 66px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 600; color: var(--paper); letter-spacing: -0.01em; }
+  .brand .mark {
+    width: 30px; height: 30px; flex: none;
+    border: 1px solid var(--amber);
+    display: grid; place-items: center;
+    font-family: var(--mono); font-size: 14px; color: var(--amber);
+    position: relative;
+  }
+  .brand .mark::after {
+    content: ""; position: absolute; inset: 3px;
+    border: 1px solid rgba(224,163,94,0.25);
+  }
+  .brand small { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; color: var(--faint); font-weight: 400; text-transform: uppercase; }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 14px; color: var(--muted); transition: color .18s; }
+  .nav-links a:hover { color: var(--paper); }
+  .nav-links .nav-cta {
+    border: 1px solid var(--line);
+    padding: 9px 16px;
+    color: var(--paper);
+    transition: border-color .18s, background .18s;
+  }
+  .nav-links .nav-cta:hover { border-color: var(--amber); background: var(--glow); }
+  @media (max-width: 760px) { .nav-links a:not(.nav-cta) { display: none; } }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 15px; font-weight: 500;
+    padding: 13px 22px;
+    border: 1px solid transparent;
+    transition: transform .15s ease, background .2s, border-color .2s, color .2s;
+    cursor: pointer;
+  }
+  .btn-primary { background: var(--amber); color: var(--ink-900); }
+  .btn-primary:hover { background: var(--amber-bright); transform: translateY(-1px); }
+  .btn-ghost { border-color: var(--line); color: var(--paper); }
+  .btn-ghost:hover { border-color: var(--amber); color: var(--amber-bright); }
+  .btn .arrow { font-family: var(--mono); transition: transform .2s; }
+  .btn:hover .arrow { transform: translateX(3px); }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero { padding-top: clamp(56px, 9vw, 112px); padding-bottom: clamp(48px, 7vw, 90px); position: relative; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 0.65fr;
+    gap: clamp(28px, 5vw, 72px);
+    align-items: end;
+  }
+  @media (max-width: 880px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+  .hero h1 {
+    font-size: clamp(38px, 6.4vw, 78px);
+    letter-spacing: -0.035em;
+    margin-top: 22px;
+  }
+  .hero h1 .accent { color: var(--amber); }
+  .hero h1 .thin { color: var(--muted); font-weight: 300; }
+  .hero-sub { margin-top: 28px; font-size: clamp(16px, 1.8vw, 20px); color: var(--text); max-width: 56ch; line-height: 1.55; }
+  .hero-sub strong { color: var(--paper); font-weight: 600; }
+  .hero-actions { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 14px; }
+
+  /* hero side panel: a terminal-ish credibility card */
+  .hero-card {
+    border: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--ink-800), var(--ink-850));
+    padding: 0;
+    font-family: var(--mono);
+    font-size: 13px;
+    box-shadow: 0 30px 60px -30px rgba(0,0,0,0.8);
+  }
+  .hero-card .bar {
+    display: flex; align-items: center; gap: 7px;
+    padding: 11px 14px; border-bottom: 1px solid var(--line-soft);
+    color: var(--faint); font-size: 11px; letter-spacing: 0.1em;
+  }
+  .hero-card .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ink-600); }
+  .hero-card .dot.a { background: var(--amber-deep); }
+  .hero-card .body { padding: 18px 16px; line-height: 1.9; }
+  .hero-card .row { display: flex; justify-content: space-between; gap: 12px; }
+  .hero-card .k { color: var(--muted); }
+  .hero-card .v { color: var(--paper); }
+  .hero-card .v.amber { color: var(--amber-bright); }
+  .hero-card .v.cyan { color: var(--cyan); }
+  .hero-card .comment { color: var(--faint); }
+
+  /* stat strip under hero */
+  .stat-strip {
+    margin-top: clamp(44px, 6vw, 76px);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stat-strip .stat { padding: 24px clamp(8px,2vw,24px); border-left: 1px solid var(--line-soft); }
+  .stat-strip .stat:first-child { border-left: 0; }
+  .stat .num { font-size: clamp(26px, 3.4vw, 40px); font-weight: 600; color: var(--paper); letter-spacing: -0.03em; font-feature-settings: "tnum"; }
+  .stat .num span { color: var(--amber); }
+  .stat .label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+  @media (max-width: 720px) {
+    .stat-strip { grid-template-columns: 1fr 1fr; }
+    .stat-strip .stat:nth-child(3) { border-left: 0; }
+    .stat-strip .stat:nth-child(odd) { border-left: 0; }
+    .stat-strip .stat { border-top: 1px solid var(--line-soft); }
+    .stat-strip .stat:nth-child(-n+2) { border-top: 0; }
+  }
+
+  /* ============================================================
+     Section scaffolding
+     ============================================================ */
+  section.block { padding-block: clamp(64px, 9vw, 120px); position: relative; }
+  .block-head { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; margin-bottom: clamp(36px, 5vw, 60px); }
+  .block-head .heads { flex: 1 1 420px; }
+  .block-head .aside { flex: 0 1 320px; color: var(--muted); font-size: 15px; align-self: flex-end; }
+  .divider { height: 1px; background: var(--line-soft); }
+
+  /* ============================================================
+     WHAT I SHIP — services grid
+     ============================================================ */
+  .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); }
+  @media (max-width: 820px) { .services { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px) { .services { grid-template-columns: 1fr; } }
+  .svc {
+    background: var(--ink-900);
+    padding: 30px 26px 34px;
+    position: relative;
+    transition: background .22s;
+    min-height: 200px;
+  }
+  .svc:hover { background: var(--ink-850); }
+  .svc .idx { font-family: var(--mono); font-size: 11px; color: var(--faint); letter-spacing: 0.14em; }
+  .svc .glyph { font-family: var(--mono); font-size: 22px; color: var(--amber); margin-top: 14px; }
+  .svc h3 { font-size: 19px; margin-top: 14px; }
+  .svc p { color: var(--muted); font-size: 15px; margin-top: 10px; margin-bottom: 0; }
+  .svc .tags { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .svc .tags span { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; color: var(--text); border: 1px solid var(--line); padding: 3px 8px; }
+  .svc::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: var(--amber); transition: width .3s ease; }
+  .svc:hover::after { width: 100%; }
+
+  /* ============================================================
+     PROJECT WORK — timeline cards
+     ============================================================ */
+  .timeline { display: flex; flex-direction: column; gap: 1px; background: var(--line-soft); border: 1px solid var(--line); }
+  .twork {
+    background: var(--ink-850);
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: clamp(16px, 3vw, 40px);
+    padding: 30px clamp(22px, 3vw, 36px);
+    transition: background .2s;
+  }
+  .twork:hover { background: var(--ink-800); }
+  @media (max-width: 760px) { .twork { grid-template-columns: 1fr; gap: 14px; } }
+  .twork .meta .period { font-family: var(--mono); font-size: 13px; color: var(--amber); letter-spacing: 0.04em; }
+  .twork .meta .kind { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-top: 8px; }
+  .twork .meta .where { font-size: 14px; color: var(--muted); margin-top: 12px; }
+  .twork .detail h3 { font-size: 21px; }
+  .twork .detail p { color: var(--muted); font-size: 15.5px; margin-top: 10px; margin-bottom: 16px; max-width: 64ch; }
+  .twork .detail .outcomes { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .twork .detail .outcomes li { position: relative; padding-left: 22px; font-size: 14.5px; color: var(--text); }
+  .twork .detail .outcomes li::before { content: "→"; position: absolute; left: 0; color: var(--amber); font-family: var(--mono); }
+  .twork .detail .stack { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .twork .detail .stack span { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .twork .detail .stack span::after { content: "·"; margin-left: 8px; color: var(--faint); }
+  .twork .detail .stack span:last-child::after { content: ""; }
+
+  /* ============================================================
+     OPERATING MODEL — engagement types
+     ============================================================ */
+  .engage { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  @media (max-width: 720px) { .engage { grid-template-columns: 1fr; } }
+  .eng {
+    border: 1px solid var(--line);
+    padding: 26px 26px 28px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.012), transparent);
+    transition: border-color .2s, transform .2s;
+  }
+  .eng:hover { border-color: var(--amber-deep); transform: translateY(-2px); }
+  .eng .top { display: flex; align-items: center; justify-content: space-between; }
+  .eng .name { font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); }
+  .eng .fit { font-family: var(--mono); font-size: 11px; color: var(--faint); }
+  .eng h3 { font-size: 20px; margin-top: 14px; }
+  .eng p { color: var(--muted); font-size: 14.5px; margin-top: 10px; margin-bottom: 0; }
+
+  /* ============================================================
+     STACK
+     ============================================================ */
+  .stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); }
+  @media (max-width: 820px) { .stack-grid { grid-template-columns: 1fr; } }
+  .stack-col { background: var(--ink-900); padding: 26px 24px 30px; }
+  .stack-col h4 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); margin: 0 0 16px; }
+  .stack-col ul { list-style: none; margin: 0; padding: 0; columns: 1; }
+  .stack-col li { font-size: 14.5px; color: var(--text); padding: 5px 0; border-bottom: 1px solid var(--line-soft); display: flex; justify-content: space-between; }
+  .stack-col li:last-child { border-bottom: 0; }
+  .stack-col li span { font-family: var(--mono); font-size: 11px; color: var(--faint); }
+
+  /* ============================================================
+     PROOF / CREDIBILITY
+     ============================================================ */
+  .proof-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(28px, 5vw, 56px); align-items: start; }
+  @media (max-width: 820px) { .proof-grid { grid-template-columns: 1fr; } }
+  .proof-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .pm { background: var(--ink-850); padding: 26px 22px; }
+  .pm .big { font-size: clamp(28px, 4vw, 40px); font-weight: 600; color: var(--paper); letter-spacing: -0.03em; }
+  .pm .big span { color: var(--amber); }
+  .pm .cap { font-size: 13.5px; color: var(--muted); margin-top: 8px; line-height: 1.45; }
+  .background .item { padding: 18px 0; border-bottom: 1px solid var(--line-soft); }
+  .background .item:last-child { border-bottom: 0; }
+  .background .role { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .background .role .r { color: var(--paper); font-weight: 600; font-size: 16px; }
+  .background .role .yr { font-family: var(--mono); font-size: 12px; color: var(--faint); white-space: nowrap; }
+  .background .item p { color: var(--muted); font-size: 14px; margin: 6px 0 0; }
+
+  /* ============================================================
+     CTA
+     ============================================================ */
+  .cta {
+    border: 1px solid var(--line);
+    background:
+      radial-gradient(100% 140% at 0% 0%, rgba(224,163,94,0.12), transparent 55%),
+      linear-gradient(180deg, var(--ink-800), var(--ink-850));
+    padding: clamp(40px, 6vw, 72px) clamp(28px, 5vw, 64px);
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: center;
+  }
+  @media (max-width: 760px) { .cta { grid-template-columns: 1fr; } }
+  .cta h2 { font-size: clamp(28px, 4vw, 46px); letter-spacing: -0.03em; max-width: 16ch; }
+  .cta p { color: var(--muted); margin-top: 18px; max-width: 48ch; }
+  .cta-right { display: flex; flex-direction: column; gap: 12px; }
+  .contact-row {
+    display: flex; align-items: center; justify-content: space-between;
+    border: 1px solid var(--line); padding: 14px 18px;
+    font-family: var(--mono); font-size: 13.5px; color: var(--text);
+    transition: border-color .18s, background .18s;
+  }
+  .contact-row:hover { border-color: var(--amber); background: var(--glow); }
+  .contact-row .lbl { color: var(--faint); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer { border-top: 1px solid var(--line-soft); padding-block: 40px; margin-top: clamp(60px, 8vw, 110px); }
+  .foot-inner { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+  footer .col-title { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 12px; }
+  footer a { color: var(--muted); font-size: 14px; display: block; padding: 3px 0; transition: color .15s; }
+  footer a:hover { color: var(--amber); }
+  footer .legal { font-size: 12.5px; color: var(--faint); max-width: 38ch; }
+  footer .legal .mono { color: var(--muted); }
+
+  /* tiny reveal for non-screenshot polish; content visible by default */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(14px); animation: rise .7s cubic-bezier(.2,.7,.2,1) forwards; }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">
+      <span class="mark">G</span>
+      <span>GlyphKnit Solutions
+        <small>Forward-deployed engineering</small>
+      </span>
+    </a>
+    <nav class="nav-links">
+      <a href="#ship">What I ship</a>
+      <a href="#work">Project work</a>
+      <a href="#model">Engagements</a>
+      <a href="#stack">Stack</a>
+      <a class="nav-cta" href="#contact">Start a project</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<a id="top"></a>
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">GlyphKnit Solutions LLC · Montréal → Remote (CA / US)</span>
+        <h1 class="reveal">
+          I ship the thing<span class="accent">.</span><br>
+          <span class="thin">the tools, pipelines, and glue</span><br>
+          your roadmap is waiting on.
+        </h1>
+        <p class="hero-sub reveal">
+          I'm <strong>Vin Rao</strong> — a freelance software developer and forward-deployed engineer.
+          I embed with your team, find what's actually slowing delivery, and build the
+          <strong>internal tools, automation, cloud integrations, and test infrastructure</strong>
+          that move it. Nine years in the trenches, AI-assisted where it earns its keep.
+        </p>
+        <div class="hero-actions reveal">
+          <a class="btn btn-primary" href="#contact">Start a project <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" href="#work">See the work <span class="arrow">↓</span></a>
+        </div>
+      </div>
+
+      <!-- credibility terminal card -->
+      <aside class="hero-card reveal" aria-hidden="true">
+        <div class="bar">
+          <span class="dot a"></span><span class="dot"></span><span class="dot"></span>
+          &nbsp; ~/glyphknit — engagement.profile
+        </div>
+        <div class="body">
+          <div class="comment"># who you're hiring</div>
+          <div class="row"><span class="k">role</span><span class="v amber">forward-deployed eng</span></div>
+          <div class="row"><span class="k">experience</span><span class="v">9 years</span></div>
+          <div class="row"><span class="k">base</span><span class="v">Montréal, QC</span></div>
+          <div class="row"><span class="k">clouds</span><span class="v cyan">AWS · Azure</span></div>
+          <div class="row"><span class="k">ai_assist</span><span class="v">Claude · GPT-4</span></div>
+          <div class="row"><span class="k">status</span><span class="v amber">open for work</span></div>
+          <div class="comment" style="margin-top:10px">$ deploy --to your-team</div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- stat strip -->
+    <div class="stat-strip">
+      <div class="stat"><div class="num">9<span> yrs</span></div><div class="label">Shipping software</div></div>
+      <div class="stat"><div class="num">80<span>%</span></div><div class="label">Manual effort cut</div></div>
+      <div class="stat"><div class="num">3h→25m</div><div class="label">CI feedback loops</div></div>
+      <div class="stat"><div class="num">2</div><div class="label">Clouds, in production</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHAT I SHIP ===================== -->
+<section class="block" id="ship">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="heads">
+        <span class="section-index">01 / SERVICES</span>
+        <h2 class="section-title">What I ship</h2>
+      </div>
+      <div class="aside">
+        Not advice decks. Working software you can run on Monday — scoped to the
+        bottleneck, handed off clean.
+      </div>
+    </div>
+
+    <div class="services">
+      <div class="svc">
+        <div class="idx">S-01</div>
+        <div class="glyph">{ }</div>
+        <h3>Internal tools &amp; automation</h3>
+        <p>The dashboards, scripts, and glue your team keeps doing by hand. Built once, documented, handed over.</p>
+        <div class="tags"><span>Python</span><span>Bash</span><span>CLI</span></div>
+      </div>
+      <div class="svc">
+        <div class="idx">S-02</div>
+        <div class="glyph">⌥</div>
+        <h3>QA-to-engineering bridge</h3>
+        <p>I speak both. Turn flaky manual testing into real test infrastructure with CI/CD quality gates that fail fast.</p>
+        <div class="tags"><span>Playwright</span><span>pytest</span><span>Jenkins</span></div>
+      </div>
+      <div class="svc">
+        <div class="idx">S-03</div>
+        <div class="glyph">⇄</div>
+        <h3>Cloud &amp; API integrations</h3>
+        <p>REST and microservice integrations validated across AWS and Azure — auth flows, access controls, data paths.</p>
+        <div class="tags"><span>AWS</span><span>Azure</span><span>REST</span></div>
+      </div>
+      <div class="svc">
+        <div class="idx">S-04</div>
+        <div class="glyph">∿</div>
+        <h3>AI-assisted delivery</h3>
+        <p>LLMs wired into real workflows — test generation, data checks, internal copilots. Used where it cuts time, not for show.</p>
+        <div class="tags"><span>Claude</span><span>GPT-4</span><span>RAG</span></div>
+      </div>
+      <div class="svc">
+        <div class="idx">S-05</div>
+        <div class="glyph">▦</div>
+        <h3>Test infrastructure</h3>
+        <p>E2E and API suites from scratch on Linux/AWS — parallelized, containerized, wired into the pipeline.</p>
+        <div class="tags"><span>Cypress</span><span>Docker</span><span>GH Actions</span></div>
+      </div>
+      <div class="svc">
+        <div class="idx">S-06</div>
+        <div class="glyph">≣</div>
+        <h3>Data validation &amp; backend support</h3>
+        <p>Ingestion checks, integrity validation, and backend glue for multi-tenant data platforms before bad data ships.</p>
+        <div class="tags"><span>MySQL</span><span>Pandas</span><span>boto3</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ===================== PROJECT WORK ===================== -->
+<section class="block" id="work">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="heads">
+        <span class="section-index">02 / SELECTED ENGAGEMENTS</span>
+        <h2 class="section-title">Project work since 2023</h2>
+      </div>
+      <div class="aside">
+        Independent and consulting engagements under GlyphKnit Solutions. Earlier
+        full-time roles below as background.
+      </div>
+    </div>
+
+    <div class="timeline">
+
+      <article class="twork">
+        <div class="meta">
+          <div class="period">2025</div>
+          <div class="kind">Consulting · embedded</div>
+          <div class="where">Connected-device platform<br>(engagement via emagine Consulting)</div>
+        </div>
+        <div class="detail">
+          <h3>Test infrastructure + AI test generation for a connected-device platform</h3>
+          <p>
+            Embedded with the product team on a React/TypeScript platform handling device
+            registration, authentication, and multi-locale flows. Built the automated coverage
+            and the pipeline it runs in.
+          </p>
+          <ul class="outcomes">
+            <li>Built UI/UX suites in Playwright and Selenium across registration, auth, and locale flows</li>
+            <li>Wired Claude and GPT-4 into test authoring — cut manual writing time ~60% with no added headcount</li>
+            <li>Embedded suites into Jenkins with quality gates; front-loaded defect detection into sprint planning</li>
+          </ul>
+          <div class="stack"><span>Playwright</span><span>Selenium</span><span>TypeScript</span><span>Jenkins</span><span>Claude / GPT-4</span></div>
+        </div>
+      </article>
+
+      <article class="twork">
+        <div class="meta">
+          <div class="period">2024 — 2025</div>
+          <div class="kind">Consulting · automation lead</div>
+          <div class="where">Global beverage brand<br>(engagement via emagine Consulting)</div>
+        </div>
+        <div class="detail">
+          <h3>Manual-to-automated migration across multi-market web platforms</h3>
+          <p>
+            Led the shift from a mostly-manual suite to Playwright and pytest automation, then
+            owned API validation and test strategy across global delivery teams.
+          </p>
+          <ul class="outcomes">
+            <li>Built reusable modules for UI regression, access control, and multi-market localization</li>
+            <li>Validated REST integrations, auth flows, and role-based access controls</li>
+            <li>Defined test strategy across distributed teams and reported quality to stakeholders</li>
+          </ul>
+          <div class="stack"><span>Playwright</span><span>pytest</span><span>REST</span><span>Postman</span><span>Python</span></div>
+        </div>
+      </article>
+
+      <article class="twork">
+        <div class="meta">
+          <div class="period">2023 — 2024</div>
+          <div class="kind">Independent · GlyphKnit</div>
+          <div class="where">Direct client work<br>AWS + Azure microservices</div>
+        </div>
+        <div class="detail">
+          <h3>Test frameworks &amp; cloud integration validation, built from scratch</h3>
+          <p>
+            Independent engagements building automation and integration coverage on
+            Linux-based AWS infrastructure — server-side investigation included, not just the
+            happy path.
+          </p>
+          <ul class="outcomes">
+            <li>Built Playwright and Cypress E2E frameworks from zero on Linux/AWS</li>
+            <li>Used CLI and SSH for server-side defect investigation and environment validation</li>
+            <li>Designed Python REST suites validating microservice integrations across AWS and Azure</li>
+          </ul>
+          <div class="stack"><span>Playwright</span><span>Cypress</span><span>Python</span><span>AWS</span><span>Azure</span><span>Docker</span><span>Linux</span></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ===================== OPERATING MODEL ===================== -->
+<section class="block" id="model">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="heads">
+        <span class="section-index">03 / OPERATING MODEL</span>
+        <h2 class="section-title">How we work together</h2>
+      </div>
+      <div class="aside">
+        Pick the shape that fits the problem. All of it is hands-on-keyboard, async-friendly,
+        and remote across CA / US time zones.
+      </div>
+    </div>
+
+    <div class="engage">
+      <div class="eng">
+        <div class="top"><span class="name">Embedded sprint</span><span class="fit">2–8 weeks</span></div>
+        <h3>Forward-deployed build</h3>
+        <p>I join your stand-ups and your repo, ship inside your sprints, and leave the team faster than I found it. Best when the bottleneck is fuzzy and needs someone in the weeds.</p>
+      </div>
+      <div class="eng">
+        <div class="top"><span class="name">Build &amp; hand-off</span><span class="fit">Fixed scope</span></div>
+        <h3>Scoped delivery</h3>
+        <p>A defined tool, suite, or integration with a clear definition of done. You get working software, docs, and a clean hand-off — not a dependency on me.</p>
+      </div>
+      <div class="eng">
+        <div class="top"><span class="name">Fractional</span><span class="fit">Retainer</span></div>
+        <h3>Ongoing engineering</h3>
+        <p>Steady part-time capacity for teams that need an extra senior pair of hands on automation, QA infra, and cloud glue without a full-time hire.</p>
+      </div>
+      <div class="eng">
+        <div class="top"><span class="name">Audit &amp; roadmap</span><span class="fit">1–2 weeks</span></div>
+        <h3>Diagnose, then plan</h3>
+        <p>A blunt look at your test infra, pipelines, or integration mess, with a prioritized, costed plan you can run with — whether or not you keep me on for the build.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ===================== STACK ===================== -->
+<section class="block" id="stack">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="heads">
+        <span class="section-index">04 / TECHNICAL STACK</span>
+        <h2 class="section-title">What's in the toolbox</h2>
+      </div>
+      <div class="aside">
+        Deep where it counts, pragmatic everywhere else. The list below is what's actually
+        shipped to production, not a buzzword wall.
+      </div>
+    </div>
+
+    <div class="stack-grid">
+      <div class="stack-col">
+        <h4>Languages</h4>
+        <ul>
+          <li>Python <span>primary</span></li>
+          <li>TypeScript / JavaScript <span>web</span></li>
+          <li>Java <span>jvm</span></li>
+          <li>Bash <span>glue</span></li>
+          <li>C# / .NET <span>prior</span></li>
+          <li>SQL <span>data</span></li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <h4>Automation &amp; QA</h4>
+        <ul>
+          <li>Playwright <span>e2e</span></li>
+          <li>pytest <span>python</span></li>
+          <li>Cypress / Selenium <span>ui</span></li>
+          <li>Postman / Newman <span>api</span></li>
+          <li>Swagger <span>contracts</span></li>
+          <li>SpecFlow / Cucumber <span>bdd</span></li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <h4>Cloud &amp; infra</h4>
+        <ul>
+          <li>AWS — S3, EC2, boto3, CLI <span>core</span></li>
+          <li>Azure — DevOps, Pipelines <span>core</span></li>
+          <li>Docker <span>containers</span></li>
+          <li>Linux / SSH <span>servers</span></li>
+          <li>PowerShell <span>provisioning</span></li>
+          <li>MySQL / Pandas <span>data</span></li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <h4>CI / CD</h4>
+        <ul>
+          <li>Jenkins <span>pipelines</span></li>
+          <li>GitHub Actions <span>pipelines</span></li>
+          <li>Azure Pipelines <span>pipelines</span></li>
+          <li>Quality gates <span>pattern</span></li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <h4>AI-assisted</h4>
+        <ul>
+          <li>Claude <span>primary</span></li>
+          <li>GPT-4 <span>secondary</span></li>
+          <li>Test generation <span>use-case</span></li>
+          <li>Workflow copilots <span>use-case</span></li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <h4>Ways of working</h4>
+        <ul>
+          <li>Jira / Confluence <span>delivery</span></li>
+          <li>Risk-based coverage <span>method</span></li>
+          <li>Shift-left testing <span>method</span></li>
+          <li>Clean hand-off &amp; docs <span>default</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ===================== PROOF / CREDIBILITY ===================== -->
+<section class="block" id="proof">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="heads">
+        <span class="section-index">05 / TRACK RECORD</span>
+        <h2 class="section-title">Receipts</h2>
+      </div>
+      <div class="aside">
+        The freelance work stands on nine years of building quality and data systems for
+        fintech, SaaS, and enterprise teams.
+      </div>
+    </div>
+
+    <div class="proof-grid">
+      <div class="proof-metrics">
+        <div class="pm">
+          <div class="big">80<span>%</span></div>
+          <div class="cap">Manual testing effort eliminated on a multi-tenant financial data platform.</div>
+        </div>
+        <div class="pm">
+          <div class="big">3h→25m</div>
+          <div class="cap">CI feedback compressed by parallelizing suites around critical paths.</div>
+        </div>
+        <div class="pm">
+          <div class="big">200<span>+</span></div>
+          <div class="cap">Postman API collections built for payment-data endpoints, automated via Newman.</div>
+        </div>
+        <div class="pm">
+          <div class="big">15<span>h/wk</span></div>
+          <div class="cap">Manual ops removed by scripting Azure provisioning and onboarding.</div>
+        </div>
+      </div>
+
+      <div class="background">
+        <div class="item">
+          <div class="role"><span class="r">Revelate Corp — QA &amp; Support Engineer</span><span class="yr">2019–2022</span></div>
+          <p>Python/Java test suites for a multi-tenant financial data platform; automated ingestion, integrity, and access-control checks. Caught data corruption before production.</p>
+        </div>
+        <div class="item">
+          <div class="role"><span class="r">Audley Travel — IT Specialist, QA</span><span class="yr">2016–2019</span></div>
+          <p>BDD frameworks (150+ feature files) for .NET apps and PowerShell/Bash automation for Azure provisioning and onboarding.</p>
+        </div>
+        <div class="item">
+          <div class="role"><span class="r">Hamilton College — B.A., Physics</span><span class="yr">2011–2015</span></div>
+          <p>Physics major with computer science and mathematics. First-principles habits, applied to shipping software.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="cta">
+      <div>
+        <span class="eyebrow">Open for work · CA / US remote</span>
+        <h2>Have something that needs shipping?</h2>
+        <p>
+          Tell me the bottleneck. If I can build it, you'll get a straight answer on scope and
+          timing — usually within a day. If I'm not the right fit, I'll tell you that too.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="mailto:3vineeth@gmail.com">Email Vin <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <div class="cta-right">
+        <a class="contact-row" href="mailto:3vineeth@gmail.com">
+          <span><span class="lbl">Email</span><br>3vineeth@gmail.com</span><span class="arrow">→</span>
+        </a>
+        <a class="contact-row" href="https://github.com/raovin">
+          <span><span class="lbl">GitHub</span><br>github.com/raovin</span><span class="arrow">→</span>
+        </a>
+        <a class="contact-row" href="#">
+          <span><span class="lbl">LinkedIn</span><br>linkedin.rao.vin</span><span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap foot-inner">
+    <div>
+      <div class="brand" style="margin-bottom:14px">
+        <span class="mark">G</span>
+        <span>GlyphKnit Solutions LLC</span>
+      </div>
+      <p class="legal">
+        Freelance software development &amp; forward-deployed engineering.<br>
+        Based in Montréal, QC · Working remote across <span class="mono">CA / US</span>.
+      </p>
+    </div>
+    <div>
+      <div class="col-title">Sections</div>
+      <a href="#ship">What I ship</a>
+      <a href="#work">Project work</a>
+      <a href="#model">Engagements</a>
+      <a href="#stack">Stack</a>
+    </div>
+    <div>
+      <div class="col-title">Contact</div>
+      <a href="mailto:3vineeth@gmail.com">3vineeth@gmail.com</a>
+      <a href="https://github.com/raovin">github.com/raovin</a>
+      <a href="#">linkedin.rao.vin</a>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:28px">
+    <p class="legal" style="font-size:11.5px">© 2026 GlyphKnit Solutions LLC. Prototype — design lane. Copy pending final approval.</p>
+  </div>
+</footer>
+
+</body>
+</html>

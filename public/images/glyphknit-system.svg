@@ -1,0 +1,74 @@
+<svg width="900" height="700" viewBox="0 0 900 700" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">GlyphKnit system diagram</title>
+  <desc id="desc">An abstract technical diagram of connected nodes, routes, and automation paths.</desc>
+  <defs>
+    <linearGradient id="panel" x1="0" y1="0" x2="900" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#201915"/>
+      <stop offset="0.52" stop-color="#111110"/>
+      <stop offset="1" stop-color="#171512"/>
+    </linearGradient>
+    <linearGradient id="copper" x1="100" y1="70" x2="790" y2="604" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F0B66F"/>
+      <stop offset="0.48" stop-color="#E0A35E"/>
+      <stop offset="1" stop-color="#A45F42"/>
+    </linearGradient>
+    <linearGradient id="mint" x1="156" y1="536" x2="783" y2="188" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8BC7B8"/>
+      <stop offset="1" stop-color="#4D7F76"/>
+    </linearGradient>
+    <pattern id="grid" width="52" height="52" patternUnits="userSpaceOnUse">
+      <path d="M52 0H0V52" stroke="#F4EEE1" stroke-opacity="0.055" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="900" height="700" rx="0" fill="url(#panel)"/>
+  <rect width="900" height="700" fill="url(#grid)"/>
+  <path d="M112 128H318C361 128 377 168 409 188L492 241C520 259 547 266 581 266H794" stroke="url(#copper)" stroke-width="3"/>
+  <path d="M112 566H276C327 566 350 526 386 493L474 412C514 376 546 358 600 358H794" stroke="url(#mint)" stroke-width="3"/>
+  <path d="M150 351H280C330 351 357 322 392 292L467 228C501 199 537 185 584 185H748" stroke="#F4EEE1" stroke-opacity="0.28" stroke-width="2"/>
+  <path d="M150 351H288C346 351 369 383 403 415L468 475C505 509 542 524 594 524H748" stroke="#F4EEE1" stroke-opacity="0.22" stroke-width="2"/>
+  <path d="M272 128V566" stroke="#F4EEE1" stroke-opacity="0.09" stroke-width="1"/>
+  <path d="M452 180V524" stroke="#F4EEE1" stroke-opacity="0.09" stroke-width="1"/>
+  <path d="M630 185V566" stroke="#F4EEE1" stroke-opacity="0.09" stroke-width="1"/>
+  <g stroke-width="2">
+    <rect x="82" y="96" width="98" height="64" rx="6" fill="#10100F" stroke="#E0A35E"/>
+    <rect x="82" y="319" width="98" height="64" rx="6" fill="#10100F" stroke="#F4EEE1" stroke-opacity="0.34"/>
+    <rect x="82" y="534" width="98" height="64" rx="6" fill="#10100F" stroke="#8BC7B8"/>
+    <rect x="282" y="96" width="98" height="64" rx="6" fill="#151311" stroke="#F0B66F" stroke-opacity="0.82"/>
+    <rect x="402" y="210" width="112" height="76" rx="6" fill="#151311" stroke="#E0A35E" stroke-opacity="0.72"/>
+    <rect x="402" y="446" width="112" height="76" rx="6" fill="#151311" stroke="#8BC7B8" stroke-opacity="0.74"/>
+    <rect x="582" y="236" width="112" height="76" rx="6" fill="#151311" stroke="#F4EEE1" stroke-opacity="0.28"/>
+    <rect x="582" y="492" width="112" height="76" rx="6" fill="#151311" stroke="#8BC7B8" stroke-opacity="0.7"/>
+    <rect x="748" y="234" width="70" height="64" rx="6" fill="#10100F" stroke="#E0A35E"/>
+    <rect x="748" y="326" width="70" height="64" rx="6" fill="#10100F" stroke="#F4EEE1" stroke-opacity="0.34"/>
+    <rect x="748" y="536" width="70" height="64" rx="6" fill="#10100F" stroke="#8BC7B8"/>
+  </g>
+  <g fill="#F4EEE1" opacity="0.72">
+    <circle cx="132" cy="128" r="5"/>
+    <circle cx="331" cy="128" r="5"/>
+    <circle cx="458" cy="248" r="5"/>
+    <circle cx="638" cy="274" r="5"/>
+    <circle cx="783" cy="266" r="5"/>
+    <circle cx="132" cy="351" r="5"/>
+    <circle cx="452" cy="351" r="5"/>
+    <circle cx="783" cy="358" r="5"/>
+    <circle cx="132" cy="566" r="5"/>
+    <circle cx="458" cy="484" r="5"/>
+    <circle cx="638" cy="530" r="5"/>
+    <circle cx="783" cy="568" r="5"/>
+  </g>
+  <g stroke="#E0A35E" stroke-opacity="0.45">
+    <path d="M226 236H324"/>
+    <path d="M226 256H296"/>
+    <path d="M226 276H340"/>
+  </g>
+  <g stroke="#8BC7B8" stroke-opacity="0.5">
+    <path d="M548 120H678"/>
+    <path d="M548 140H626"/>
+    <path d="M548 160H710"/>
+  </g>
+  <g stroke="#F4EEE1" stroke-opacity="0.16">
+    <path d="M200 646H338"/>
+    <path d="M360 646H534"/>
+    <path d="M556 646H702"/>
+  </g>
+</svg>

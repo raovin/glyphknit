@@ -38,7 +38,7 @@ Required GitHub Actions secrets:
 - `GLYPHKNIT_DEPLOY_SSH_KEY`
 - `GLYPHKNIT_DEPLOY_KNOWN_HOSTS`
 
-Optional build-time SEO and analytics variables:
+Optional build-time SEO and analytics GitHub repository variables:
 
 - `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`
 - `NEXT_PUBLIC_GA_MEASUREMENT_ID`

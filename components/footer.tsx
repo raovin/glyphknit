@@ -6,6 +6,7 @@ import { siteConfig } from "@/content/site";
 const footerLinks = [
   { href: "/work", label: "Work" },
   { href: "/code", label: "Code" },
+  { href: "/resume", label: "Resume" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
   { href: "/work-with-me", label: "Work with me" }

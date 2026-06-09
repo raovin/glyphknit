@@ -5,7 +5,7 @@ Portfolio site for Vin Rao, built with Next.js App Router, TypeScript, and Tailw
 ## Commands
 
 ```bash
-npm install
+npm ci
 npm run dev
 npm run lint
 npm run build
@@ -23,8 +23,24 @@ http://localhost:3000
 - Public project content comes from approved personal repos under `/Users/vin/projects`.
 - Private infrastructure, raw data, logs, secrets, and local generated output are excluded.
 
-## Launch TODOs
+## Deployment
 
-- Confirm public client naming for resume-backed case studies.
-- Add public links for planned demo repos when they exist.
-- Confirm final deployment target and DNS.
+Pushes to `main` run `.github/workflows/deploy.yml`.
+
+The workflow runs `npm ci`, `npm run lint`, `npm run build`, uploads `out/`
+to Mnemosyne, backs up the current live tree, and syncs into `/opt/glyphknit`.
+
+Required GitHub Actions secrets:
+
+- `GLYPHKNIT_DEPLOY_HOST`
+- `GLYPHKNIT_DEPLOY_USER`
+- `GLYPHKNIT_DEPLOY_PATH`
+- `GLYPHKNIT_DEPLOY_SSH_KEY`
+- `GLYPHKNIT_DEPLOY_KNOWN_HOSTS`
+
+Optional build-time SEO and analytics variables:
+
+- `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID`
+- `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`
+- `NEXT_PUBLIC_PLAUSIBLE_SRC`

@@ -8,7 +8,3 @@ export function getProjectBySlug(slug: string) {
 export function getRepoBySlug(slug: string) {
   return repos.find((repo) => repo.slug === slug);
 }
-
-export function isTodo(value: string | undefined) {
-  return !value || value.includes("TODO(");
-}

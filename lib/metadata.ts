@@ -19,6 +19,7 @@ export function buildMetadata({
     ? `${title} | ${siteConfig.name} - ${siteConfig.primaryTitle}`
     : `${siteConfig.name} - ${siteConfig.primaryTitle}`;
   const url = new URL(path, siteConfig.canonicalUrl).toString();
+  const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
   return {
     metadataBase: new URL(siteConfig.canonicalUrl),
@@ -49,6 +50,13 @@ export function buildMetadata({
       title: pageTitle,
       description,
       images: [image]
-    }
+    },
+    ...(googleVerification
+      ? {
+          verification: {
+            google: googleVerification
+          }
+        }
+      : {})
   };
 }

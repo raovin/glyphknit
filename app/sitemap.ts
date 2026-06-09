@@ -9,10 +9,10 @@ const staticRoutes = [
   "/",
   "/work",
   "/code",
+  "/resume",
   "/about",
   "/contact",
-  "/work-with-me",
-  "/writing"
+  "/work-with-me"
 ];
 
 function canonicalRoute(route: string) {

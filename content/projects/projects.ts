@@ -28,7 +28,7 @@ export const projects: Project[] = [
     summary:
       "Playwright and Selenium suites for React/TypeScript device registration, authentication, and multi-locale flows, backed by Jenkins quality gates.",
     context:
-      "Resume-backed consultant engagement through emagine Consulting for a connected-device platform. Client naming stays public-safe on the site until explicitly confirmed.",
+      "Resume-backed consultant engagement through emagine Consulting for a connected-device platform. Client naming stays anonymized for public portfolio use.",
     problem:
       "Registration, authentication, and localization flows needed repeatable coverage across modern React/TypeScript surfaces without growing manual test-authoring work.",
     role:
@@ -136,7 +136,7 @@ export const projects: Project[] = [
     summary:
       "Reusable Playwright and pytest automation for UI regression, access control, REST integrations, authentication, and multi-market localization.",
     context:
-      "Resume-backed consultant engagement through emagine Consulting for a global beverage platform. Client naming stays public-safe on the site until explicitly confirmed.",
+      "Resume-backed consultant engagement through emagine Consulting for a global beverage platform. Client naming stays anonymized for public portfolio use.",
     problem:
       "A predominantly manual test suite needed reusable automation and clearer quality reporting across global delivery teams.",
     role:
@@ -224,7 +224,7 @@ export const projects: Project[] = [
     challenges:
       "The artifact had to prove the release-gate shape without pretending five sample cases are a production model benchmark.",
     impact: [
-      "TODO(metric): add real gate adoption, case volume, defect escape, or deployment block rate if this pattern is used in production.",
+      "Offline reviewer path runs without secrets, paid APIs, network calls, or model downloads.",
       "Repo evidence: local-only eval path, JSON report artifact, failing baseline command, and unit coverage for loader, metrics, JSON contracts, and report metadata."
     ],
     proves:
@@ -259,7 +259,7 @@ export const projects: Project[] = [
     challenges:
       "The scoring model had to communicate partial-data states instead of inventing certainty from incomplete coverage.",
     impact: [
-      "TODO(metric): add real usage, upload volume, saved manual tracking time, or defect reduction.",
+      "Private demo evidence: authenticated product surface for lab data, wearable summaries, custom ranges, score states, and export paths.",
       "Repo evidence: auth/API route tests, migration tests, local Postgres smoke scripts, seeded browser smoke path, and export endpoints."
     ],
     proves:
@@ -268,8 +268,6 @@ export const projects: Project[] = [
       "Demonstrates that the SDET positioning is not limited to test code. This is a working full-stack product surface.",
     emTakeaway:
       "Shows careful handling of data freshness, scoring confidence, and repeatable local verification.",
-    repoUrl: "https://github.com/raovin/health-dashboard",
-    demoUrl: "https://health.rao.vin",
     images: ["/images/glyphknit-system.svg"],
     featured: false,
     nda: false
@@ -296,7 +294,7 @@ export const projects: Project[] = [
     challenges:
       "The project balances migration automation with strict separation between safe repo documentation and private source files.",
     impact: [
-      "TODO(metric): add real migration volume, restore drill result, OCR accuracy target, or time saved.",
+      "Operational evidence: documented local stack, production shape, migration runbook, backup planning, and private-source separation.",
       "Repo evidence: architecture docs, backup/restore docs, migration runbook, local disposable stack, and production deployment notes."
     ],
     proves:
@@ -305,7 +303,6 @@ export const projects: Project[] = [
       "Shows systems thinking beyond UI automation: infrastructure, data portability, privacy, and runbooks.",
     emTakeaway:
       "The clean separation between source data and repo docs is exactly the kind of judgment production teams need.",
-    repoUrl: "https://github.com/raovin/paperwake",
     images: ["/images/glyphknit-system.svg"],
     featured: false,
     nda: false

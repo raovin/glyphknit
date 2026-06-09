@@ -22,8 +22,8 @@ export default function CodePage() {
         <p className="mono-label">Code</p>
         <h1 className="mt-4 text-4xl md:text-5xl">Repository evidence</h1>
         <p className="mt-5 text-lg text-[var(--muted)]">
-          Public repos and planned demos. Planned cards are marked in progress
-          and do not include fake links.
+          Public source links appear only when the repository is public. Private
+          and local artifacts point to case-study evidence instead of dead links.
         </p>
       </section>
       <Section eyebrow="High priority" title="Best proof for the target roles">

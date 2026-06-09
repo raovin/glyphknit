@@ -9,6 +9,7 @@ import { ThemeToggle } from "./theme-toggle";
 const navItems = [
   { href: "/work", label: "Work" },
   { href: "/code", label: "Code" },
+  { href: "/resume", label: "Resume" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" }
 ];
@@ -45,7 +46,7 @@ export function Nav() {
           <ThemeToggle />
           <div className="hidden md:block">
             <ButtonLink
-              href={siteConfig.resumeHref}
+              href={siteConfig.resumePageHref}
               icon={<FileDown aria-hidden="true" size={16} />}
             >
               Resume

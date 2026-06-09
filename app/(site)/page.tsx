@@ -48,8 +48,7 @@ export default function HomePage() {
               View work
             </ButtonLink>
             <ButtonLink
-              download
-              href={siteConfig.resumeHref}
+              href={siteConfig.resumePageHref}
               icon={<FileDown aria-hidden="true" size={17} />}
             >
               Resume
@@ -90,7 +89,7 @@ export default function HomePage() {
       </Section>
 
       <Section
-        description="Repo cards focus on evidence a technical recruiter or engineering manager can scan quickly."
+        description="Repo cards separate public source, private-source case studies, local artifacts, and planned demos."
         eyebrow="02 / Featured code demos"
         title="Code with a review path"
       >

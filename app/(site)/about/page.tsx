@@ -61,8 +61,9 @@ export default function AboutPage() {
               ))}
             </div>
             <p className="mt-5 text-sm text-[var(--muted)]">
-              Resume PDF is served from the current SDET build in the Canvas repo.
-              Public client naming still deserves one final human check before launch.
+              Resume PDF is served from the current SDET build. Client names stay
+              anonymized on the public site when the work is covered by agency,
+              client, or private-source boundaries.
             </p>
           </aside>
         </div>

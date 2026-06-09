@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 
 import "./globals.css";
 
+import { Analytics } from "@/components/analytics";
 import { siteConfig } from "@/content/site";
 import { buildMetadata } from "@/lib/metadata";
 
@@ -39,7 +40,7 @@ const personJsonLd = {
   jobTitle: siteConfig.primaryTitle,
   url: siteConfig.canonicalUrl,
   email: `mailto:${siteConfig.email}`,
-  sameAs: [siteConfig.githubUrl],
+  sameAs: [siteConfig.githubUrl, siteConfig.linkedinUrl],
   knowsAbout: siteConfig.seoKeywords
 };
 
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
           type="application/ld+json"
         />
+        <Analytics />
         {children}
       </body>
     </html>

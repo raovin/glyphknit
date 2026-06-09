@@ -6,15 +6,11 @@ export const siteConfig = {
   email: "3vineeth@gmail.com",
   githubUrl: "https://github.com/raovin",
   linkedinUrl: "https://linkedin.rao.vin/",
+  resumePageHref: "/resume/",
   resumeHref: "/resume.pdf",
   availability:
     "Open to senior QA/SDET and ML-quality roles, EU-remote. Select contract engagements considered.",
   locationLine: "~9 yrs · Lisbon (WET) · EU-remote",
-  pendingInputs: [
-    "TODO(confirm_public_contact_details)",
-    "TODO(confirm_public_client_naming)",
-    "TODO(planned_demo_repo_links)"
-  ],
   seoKeywords: [
     "Software Developer in Test",
     "SDET",

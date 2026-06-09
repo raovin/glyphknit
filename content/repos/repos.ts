@@ -12,7 +12,7 @@ export type Repo = {
   badges: string[];
   priority: RepoPriority;
   featured: boolean;
-  status?: "live" | "in-progress" | "needs-link";
+  status?: "public" | "private" | "planned" | "local";
 };
 
 export const repos: Repo[] = [
@@ -24,10 +24,26 @@ export const repos: Repo[] = [
     proves:
       "MLOps quality gate design, testable model behavior, structured output validation, and CI-friendly reporting.",
     stack: ["Python", "unittest", "JSONL", "GitHub Actions", "Make"],
+    reportUrl: "/work/mlops-readiness-scaffold",
     badges: ["flagship", "offline", "CI gate"],
     priority: "high",
     featured: true,
-    status: "needs-link"
+    status: "local"
+  },
+  {
+    slug: "glyphknit",
+    name: "glyphknit",
+    description:
+      "Static Next.js portfolio deployed behind Nginx Proxy Manager with HTTPS, route-level metadata, sitemap, and resume-backed case studies.",
+    proves:
+      "Public source for the portfolio itself: static export, responsive UI, SEO metadata, deployment automation, and production hosting hygiene.",
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "GitHub Actions", "Nginx"],
+    repoUrl: "https://github.com/raovin/glyphknit",
+    demoUrl: "https://glyphknit.com",
+    badges: ["public source", "static export", "HTTPS"],
+    priority: "high",
+    featured: true,
+    status: "public"
   },
   {
     slug: "health-dashboard",
@@ -37,12 +53,11 @@ export const repos: Repo[] = [
     proves:
       "Full-stack application code with database modeling, auth, data validation, tests, and Playwright smoke coverage.",
     stack: ["Next.js", "TypeScript", "Postgres", "Drizzle", "Vitest", "Playwright"],
-    repoUrl: "https://github.com/raovin/health-dashboard",
-    demoUrl: "https://health.rao.vin",
+    reportUrl: "/work/health-dashboard",
     badges: ["full-stack", "tested", "data"],
     priority: "high",
     featured: true,
-    status: "live"
+    status: "private"
   },
   {
     slug: "paperwake",
@@ -52,11 +67,11 @@ export const repos: Repo[] = [
     proves:
       "Infrastructure documentation, data portability, privacy boundaries, and recoverable system design.",
     stack: ["Docker", "Paperless-ngx", "Postgres", "Redis", "Caddy", "BorgBackup"],
-    repoUrl: "https://github.com/raovin/paperwake",
+    reportUrl: "/work/paperwake",
     badges: ["infra", "runbooks", "privacy"],
     priority: "medium",
-    featured: true,
-    status: "live"
+    featured: false,
+    status: "private"
   },
   {
     slug: "canvas",
@@ -66,11 +81,11 @@ export const repos: Repo[] = [
     proves:
       "Document build automation, variant management, verification scripts, and clean generated-artifact hygiene.",
     stack: ["LaTeX", "LuaLaTeX", "Python", "Make", "Shell"],
-    repoUrl: "https://github.com/raovin/canvas",
+    reportUrl: "/resume",
     badges: ["automation", "docs"],
     priority: "medium",
     featured: false,
-    status: "live"
+    status: "private"
   },
   {
     slug: "folio",
@@ -80,35 +95,35 @@ export const repos: Repo[] = [
     proves:
       "CI-backed document generation and source-controlled professional artifacts.",
     stack: ["LaTeX", "GitHub Actions", "Shell"],
-    repoUrl: "https://github.com/raovin/folio",
+    reportUrl: "/resume",
     badges: ["CI", "LaTeX"],
     priority: "medium",
     featured: false,
-    status: "live"
+    status: "private"
   },
   {
     slug: "web-e2e-framework",
     name: "web-e2e-framework",
     description:
       "Planned Playwright framework demo for page objects, fixtures, CI reports, retries, and stable selectors.",
-    proves: "TODO(repo): planned public demo for senior web E2E automation patterns.",
+    proves: "Planned public demo for senior web E2E automation patterns.",
     stack: ["Playwright", "TypeScript", "GitHub Actions"],
     badges: ["planned", "web E2E"],
     priority: "high",
     featured: false,
-    status: "in-progress"
+    status: "planned"
   },
   {
     slug: "api-test-framework",
     name: "api-test-framework",
     description:
       "Planned Python API testing framework demo for schema checks, auth flows, data setup, and contract assertions.",
-    proves: "TODO(repo): planned public demo for API testing and service validation.",
+    proves: "Planned public demo for API testing and service validation.",
     stack: ["Python", "pytest", "HTTPX", "JSON Schema"],
     badges: ["planned", "API"],
     priority: "high",
     featured: false,
-    status: "in-progress"
+    status: "planned"
   },
   {
     slug: "ml-quality-gate",
@@ -116,36 +131,36 @@ export const repos: Repo[] = [
     description:
       "Planned flagship quality gate for model/API outputs with data validation, service checks, experiment evidence, and CI thresholds.",
     proves:
-      "TODO(repo): planned expansion of the current MLOps readiness scaffold into a richer public ML-quality demo.",
+      "Planned expansion of the current MLOps readiness scaffold into a richer public ML-quality demo.",
     stack: ["Python", "pytest", "Pandera", "Great Expectations", "FastAPI", "MLflow"],
     badges: ["planned", "flagship", "ML quality"],
     priority: "high",
     featured: false,
-    status: "in-progress"
+    status: "planned"
   },
   {
     slug: "flaky-test-lab",
     name: "flaky-test-lab",
     description:
       "Planned lab for reproducing timing, isolation, and selector flake, then showing diagnosis and stabilization patterns.",
-    proves: "TODO(repo): planned public demo for debugging unreliable automation.",
+    proves: "Planned public demo for debugging unreliable automation.",
     stack: ["Playwright", "TypeScript", "CI reports"],
     badges: ["planned", "flake analysis"],
     priority: "medium",
     featured: false,
-    status: "in-progress"
+    status: "planned"
   },
   {
     slug: "ci-quality-pipeline",
     name: "ci-quality-pipeline",
     description:
       "Planned CI quality pipeline demo showing layered checks, artifacts, thresholds, and readable release evidence.",
-    proves: "TODO(repo): planned public demo for CI/CD testing and release gates.",
+    proves: "Planned public demo for CI/CD testing and release gates.",
     stack: ["GitHub Actions", "Docker", "pytest", "Playwright"],
     badges: ["planned", "CI/CD"],
     priority: "medium",
     featured: false,
-    status: "in-progress"
+    status: "planned"
   }
 ];
 

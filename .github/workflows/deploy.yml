@@ -54,7 +54,7 @@ jobs:
         run: |
           set -euo pipefail
           release="glyphknit-${GITHUB_SHA}-${GITHUB_RUN_ATTEMPT}"
-          rsync -az --delete \
+          rsync -az --delete --no-owner --no-group --chmod=D755,F644 \
             -e "ssh -i ~/.ssh/glyphknit_deploy -o StrictHostKeyChecking=yes" \
             out/ "${DEPLOY_USER}@${DEPLOY_HOST}:~/releases/${release}/"
           ssh -i ~/.ssh/glyphknit_deploy -o StrictHostKeyChecking=yes \
@@ -67,7 +67,7 @@ jobs:
           test -f "${release_dir}/index.html"
           test -f "${release_dir}/sitemap.xml"
           cp -a "${DEPLOY_PATH}" "${backup_dir}"
-          rsync -a --delete "${release_dir}/" "${DEPLOY_PATH}/"
+          rsync -a --delete --no-owner --no-group --chmod=D755,F644 "${release_dir}/" "${DEPLOY_PATH}/"
           rm -rf "${release_dir}"
           find "${DEPLOY_PATH}" -maxdepth 3 -type f -name index.html | wc -l
           REMOTE

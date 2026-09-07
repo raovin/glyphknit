@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { demos } from "@/content/demos/demos";
 import { projects } from "@/content/projects/projects";
 import { siteConfig } from "@/content/site";
 
@@ -8,6 +9,7 @@ export const dynamic = "force-static";
 const staticRoutes = [
   "/",
   "/work",
+  "/demos",
   "/code",
   "/resume",
   "/about",
@@ -22,8 +24,9 @@ function canonicalRoute(route: string) {
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const projectRoutes = projects.map((project) => `/work/${project.slug}`);
+  const demoRoutes = demos.map((demo) => `/demos/${demo.slug}`);
 
-  return [...staticRoutes, ...projectRoutes].map((route) => ({
+  return [...staticRoutes, ...projectRoutes, ...demoRoutes].map((route) => ({
     url: new URL(canonicalRoute(route), siteConfig.canonicalUrl).toString(),
     lastModified: now,
     changeFrequency: route === "/" ? "monthly" : "yearly",

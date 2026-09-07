@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+
 import { RepoCard } from "@/components/repo-card";
 import { Section } from "@/components/section";
 import { repos } from "@/content/repos/repos";
@@ -24,6 +27,16 @@ export default function CodePage() {
         <p className="mt-5 text-lg text-[var(--muted)]">
           Public source links appear only when the repository is public. Private
           and local artifacts point to case-study evidence instead of dead links.
+          Nothing here is a promise of future work.
+        </p>
+        <p className="mt-5">
+          <Link
+            className="focus-link inline-flex items-center gap-2 text-sm font-semibold"
+            href="/demos/"
+          >
+            Prefer to run something instead? Open the demos
+            <ArrowRight aria-hidden="true" size={16} />
+          </Link>
         </p>
       </section>
       <Section eyebrow="High priority" title="Best proof for the target roles">

@@ -100,67 +100,6 @@ export const repos: Repo[] = [
     priority: "medium",
     featured: false,
     status: "private"
-  },
-  {
-    slug: "web-e2e-framework",
-    name: "web-e2e-framework",
-    description:
-      "Planned Playwright framework demo for page objects, fixtures, CI reports, retries, and stable selectors.",
-    proves: "Planned public demo for senior web E2E automation patterns.",
-    stack: ["Playwright", "TypeScript", "GitHub Actions"],
-    badges: ["planned", "web E2E"],
-    priority: "high",
-    featured: false,
-    status: "planned"
-  },
-  {
-    slug: "api-test-framework",
-    name: "api-test-framework",
-    description:
-      "Planned Python API testing framework demo for schema checks, auth flows, data setup, and contract assertions.",
-    proves: "Planned public demo for API testing and service validation.",
-    stack: ["Python", "pytest", "HTTPX", "JSON Schema"],
-    badges: ["planned", "API"],
-    priority: "high",
-    featured: false,
-    status: "planned"
-  },
-  {
-    slug: "ml-quality-gate",
-    name: "ml-quality-gate",
-    description:
-      "Planned flagship quality gate for model/API outputs with data validation, service checks, experiment evidence, and CI thresholds.",
-    proves:
-      "Planned expansion of the current MLOps readiness scaffold into a richer public ML-quality demo.",
-    stack: ["Python", "pytest", "Pandera", "Great Expectations", "FastAPI", "MLflow"],
-    badges: ["planned", "flagship", "ML quality"],
-    priority: "high",
-    featured: false,
-    status: "planned"
-  },
-  {
-    slug: "flaky-test-lab",
-    name: "flaky-test-lab",
-    description:
-      "Planned lab for reproducing timing, isolation, and selector flake, then showing diagnosis and stabilization patterns.",
-    proves: "Planned public demo for debugging unreliable automation.",
-    stack: ["Playwright", "TypeScript", "CI reports"],
-    badges: ["planned", "flake analysis"],
-    priority: "medium",
-    featured: false,
-    status: "planned"
-  },
-  {
-    slug: "ci-quality-pipeline",
-    name: "ci-quality-pipeline",
-    description:
-      "Planned CI quality pipeline demo showing layered checks, artifacts, thresholds, and readable release evidence.",
-    proves: "Planned public demo for CI/CD testing and release gates.",
-    stack: ["GitHub Actions", "Docker", "pytest", "Playwright"],
-    badges: ["planned", "CI/CD"],
-    priority: "medium",
-    featured: false,
-    status: "planned"
   }
 ];
 

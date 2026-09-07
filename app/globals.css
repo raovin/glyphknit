@@ -77,7 +77,7 @@ select {
   font: inherit;
 }
 
-:where(a, button, [tabindex]):focus-visible {
+:where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
   outline: 3px solid var(--accent-strong);
   outline-offset: 4px;
 }

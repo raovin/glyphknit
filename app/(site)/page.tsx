@@ -1,4 +1,4 @@
-import { ArrowRight, FileDown, Github, Mail } from "lucide-react";
+import { ArrowRight, FileDown, Github, Mail, Play } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -41,10 +41,13 @@ export default function HomePage() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink
-              href="/work"
-              icon={<ArrowRight aria-hidden="true" size={17} />}
+              href="/demos/eval-gate/"
+              icon={<Play aria-hidden="true" size={17} />}
               variant="primary"
             >
+              Run a live demo
+            </ButtonLink>
+            <ButtonLink href="/work" icon={<ArrowRight aria-hidden="true" size={17} />}>
               View work
             </ButtonLink>
             <ButtonLink
@@ -54,6 +57,10 @@ export default function HomePage() {
               Resume
             </ButtonLink>
           </div>
+          <p className="mt-4 max-w-2xl text-sm text-[var(--faint)]">
+            The demo is a working release gate you can operate in the browser. No
+            sign-up, no clone, nothing to install.
+          </p>
         </div>
         <div className="hairline-card reveal overflow-hidden p-5">
           <Image
@@ -89,8 +96,8 @@ export default function HomePage() {
       </Section>
 
       <Section
-        description="Repo cards separate public source, private-source case studies, local artifacts, and planned demos."
-        eyebrow="02 / Featured code demos"
+        description="Repo cards separate public source, private-source case studies, and local artifacts. For something you can operate rather than read, start with the live demo."
+        eyebrow="02 / Featured code"
         title="Code with a review path"
       >
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -98,7 +105,14 @@ export default function HomePage() {
             <RepoCard key={repo.slug} repo={repo} />
           ))}
         </div>
-        <div className="mt-6">
+        <div className="mt-6 flex flex-wrap gap-5">
+          <Link
+            className="focus-link inline-flex items-center gap-2 text-sm font-semibold"
+            href="/demos/eval-gate/"
+          >
+            Run the release-gate demo
+            <ArrowRight aria-hidden="true" size={16} />
+          </Link>
           <Link className="focus-link inline-flex items-center gap-2 text-sm font-semibold" href="/code">
             See all code cards
             <ArrowRight aria-hidden="true" size={16} />

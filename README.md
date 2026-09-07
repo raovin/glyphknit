@@ -11,6 +11,18 @@ npm run lint
 npm run build
 ```
 
+## Spec Kit Workflow
+
+Use Spec Kit for medium or large product changes. Trivial copy or styling fixes
+may be made directly when they do not change behavior, data, routes, export or
+deployment behavior, or architecture.
+
+Codex skill sequence: `$speckit-constitution`, `$speckit-specify`,
+`$speckit-clarify` when requirements are ambiguous, `$speckit-plan`,
+`$speckit-tasks`, then `$speckit-implement`.
+
+Project rules live in `.specify/memory/constitution.md`.
+
 Local dev server:
 
 ```bash

@@ -1,7 +1,22 @@
+> **ARCHIVED — historical reference, not current guidance.**
+>
+> This documents the May 2026 "Claude / Opus" design lane for a freelance
+> positioning that has since been reversed. See `docs/positioning.md` for
+> current positioning. The referenced prototype under
+> `prototypes/claude-opus-aesthetic/` has been removed and is recoverable from
+> git history.
+>
+> The shipped site deliberately diverged from this note: it uses a teal accent
+> (`--accent: #2f9b90`, `app/globals.css`), not the copper/amber described
+> below. Do not "restore" the amber palette on the strength of this file.
+>
+> Retained for the typography, spacing, and section-rhythm rationale, which is
+> still sound.
+
 # GlyphKnit Solutions — Design Notes (Claude / Opus lane)
 
 Design direction, system tokens, and the copy Codex should steal for the production site.
-Prototype lives at `prototypes/claude-opus-aesthetic/index.html`.
+Prototype (removed; see git history) lived at `prototypes/claude-opus-aesthetic/index.html`.
 
 ---
 
@@ -154,7 +169,7 @@ low-friction whatever Codex chose.
 
 **Conflict avoidance (per the brief):**
 - This lane does **not** edit root `index.html`, `package.json`, or Codex's implementation
-  files. All output is under `prototypes/claude-opus-aesthetic/` and this doc.
+  files. All output was under `prototypes/claude-opus-aesthetic/` (now removed) and this doc.
 - If Vin picks this design, the clean path is: Codex keeps the plumbing (routing, forms,
   meta/SEO, analytics, deploy) and adopts these tokens + copy + section structure into the
   production templates. Don't hand-merge two full HTML files — port tokens, then sections.

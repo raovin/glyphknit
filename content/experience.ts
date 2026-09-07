@@ -1,6 +1,12 @@
 export type ExperienceItem = {
   company: string;
   publicLabel: string;
+  /** Named end client, when approved for public use. */
+  client?: string;
+  /** Contracting vehicle the engagement ran through. */
+  via?: string;
+  /** Independent consulting delivery versus direct employment. */
+  kind?: "consulting" | "employment";
   title: string;
   period: string;
   location: string;
@@ -12,9 +18,11 @@ export type ExperienceItem = {
 export const experience: ExperienceItem[] = [
   {
     company: "emagine Consulting",
-    publicLabel: "Connected-device platform engagement",
-    title: "QA Automation Engineer Consultant",
-    period: "Feb 2025 - Dec 2025",
+    publicLabel: "Connected-device platform",
+    client: "Philip Morris International",
+    kind: "employment",
+    title: "QA Automation Engineer",
+    period: "Jan 2025 - Present",
     location: "Lisbon, Portugal | Remote",
     bullets: [
       "Built Playwright and Selenium suites for React/TypeScript device registration, authentication, and multi-locale flows.",
@@ -26,9 +34,11 @@ export const experience: ExperienceItem[] = [
   },
   {
     company: "emagine Consulting",
-    publicLabel: "Global beverage platform engagement",
-    title: "QA Automation Engineer Consultant",
-    period: "Apr 2024 - Jan 2025",
+    publicLabel: "Global beverage platform",
+    client: "Carlsberg Group",
+    kind: "employment",
+    title: "QA Automation Engineer",
+    period: "Mar 2024 - Dec 2024",
     location: "Lisbon, Portugal | Remote",
     bullets: [
       "Shifted a predominantly manual suite toward Playwright and pytest automation.",
@@ -40,8 +50,9 @@ export const experience: ExperienceItem[] = [
   },
   {
     company: "GlyphKnit Solutions LLC",
-    publicLabel: "Independent SDET consulting",
-    title: "Owner | QA & SDET Consultant",
+    publicLabel: "GlyphKnit Solutions LLC",
+    kind: "consulting",
+    title: "Founder | QA & SDET Consultant",
     period: "Feb 2023 - Mar 2024",
     location: "Montreal, QC | Remote",
     bullets: [
@@ -54,7 +65,9 @@ export const experience: ExperienceItem[] = [
   },
   {
     company: "Revelate Corp",
-    publicLabel: "Financial data platform",
+    publicLabel: "Revelate Corp",
+    client: "Revelate Corp",
+    kind: "employment",
     title: "QA Analyst | Support Engineer",
     period: "Mar 2019 - Dec 2022",
     location: "Montreal, QC | Remote",
@@ -68,7 +81,9 @@ export const experience: ExperienceItem[] = [
   },
   {
     company: "Audley Travel",
-    publicLabel: ".NET BDD and IT automation",
+    publicLabel: "Audley Travel",
+    client: "Audley Travel",
+    kind: "employment",
     title: "IT Specialist - Support & Quality Assurance",
     period: "Nov 2016 - Feb 2019",
     location: "Boston, MA",

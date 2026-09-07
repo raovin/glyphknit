@@ -28,7 +28,7 @@ export const projects: Project[] = [
     summary:
       "Playwright and Selenium suites for React/TypeScript device registration, authentication, and multi-locale flows, backed by Jenkins quality gates.",
     context:
-      "Resume-backed consultant engagement through emagine Consulting for a connected-device platform. Client naming stays anonymized for public portfolio use.",
+      "QA automation work at Philip Morris International on a connected-device platform.",
     problem:
       "Registration, authentication, and localization flows needed repeatable coverage across modern React/TypeScript surfaces without growing manual test-authoring work.",
     role:
@@ -64,7 +64,7 @@ export const projects: Project[] = [
     summary:
       "Python, Java, Postman/Newman, MySQL, and Pandas checks for ingestion, data integrity, access control, and payment-data APIs.",
     context:
-      "Resume-backed QA Analyst and Support Engineer work on a multi-tenant financial data storage platform.",
+      "QA Analyst and Support Engineer work at Revelate Corp on a multi-tenant financial data storage platform.",
     problem:
       "Manual regression and data checks were too slow for a platform handling ingestion, payment-data rules, transformations, and access-control behavior.",
     role:
@@ -100,7 +100,7 @@ export const projects: Project[] = [
     summary:
       "Playwright, Cypress, Python, Postman, and Requests frameworks across AWS and Azure services, with test execution and coverage improvements.",
     context:
-      "Resume-backed independent SDET consulting through GlyphKnit Solutions LLC.",
+      "Independent SDET consulting delivered directly through GlyphKnit Solutions LLC.",
     problem:
       "Cloud-backed systems needed E2E, API, integration, and access-control checks that could survive real deployment environments.",
     role:
@@ -136,7 +136,7 @@ export const projects: Project[] = [
     summary:
       "Reusable Playwright and pytest automation for UI regression, access control, REST integrations, authentication, and multi-market localization.",
     context:
-      "Resume-backed consultant engagement through emagine Consulting for a global beverage platform. Client naming stays anonymized for public portfolio use.",
+      "QA automation work at Carlsberg Group on a global beverage platform.",
     problem:
       "A predominantly manual test suite needed reusable automation and clearer quality reporting across global delivery teams.",
     role:
@@ -172,7 +172,7 @@ export const projects: Project[] = [
     summary:
       "Cucumber and SpecFlow BDD frameworks plus PowerShell/Bash automation for Azure provisioning, permissions, and onboarding.",
     context:
-      "Resume-backed IT Specialist and Support/QA work for a travel-sector software environment.",
+      "IT Specialist and Support/QA work at Audley Travel, a travel-sector software environment.",
     problem:
       "Business requirements, .NET application behavior, and IT provisioning work needed more repeatable validation and less manual support load.",
     role:

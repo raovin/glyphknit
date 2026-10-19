@@ -17,7 +17,7 @@ type PageProps = {
 const sampleGate = `{
   "cases": "data/sample_cases.jsonl",
   "model": "rule-based",
-  "min_pass_rate": 0.95,
+  "min_pass_rate": 1.0,
   "output": "reports/readiness-report.json"
 }`;
 
@@ -62,7 +62,7 @@ export default async function WorkDetailPage({ params }: PageProps) {
       </Link>
 
       <header className="mt-8">
-        <p className="mono-label">{project.nda ? "NDA case study" : "Public project"}</p>
+        <p className="mono-label">{project.nda ? "NDA case study" : project.repoUrl ? "Public project" : "Case study"}</p>
         <h1 className="mt-4 text-4xl md:text-5xl">{project.title}</h1>
         <p className="mt-5 text-lg text-[var(--muted)]">{project.summary}</p>
         <div className="mt-6 flex flex-wrap gap-2">

@@ -233,6 +233,7 @@ export const projects: Project[] = [
       "Shows a credible bridge from SDET work into ML testing, data validation, and MLOps quality without overclaiming model expertise.",
     emTakeaway:
       "Useful pattern for teams that need lightweight eval gates before they invest in a full ML platform stack.",
+    repoUrl: "https://github.com/raovin/mlops-artifact",
     images: ["/images/glyphknit-system.svg"],
     featured: false,
     nda: false

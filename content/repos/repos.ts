@@ -24,11 +24,12 @@ export const repos: Repo[] = [
     proves:
       "MLOps quality gate design, testable model behavior, structured output validation, and CI-friendly reporting.",
     stack: ["Python", "unittest", "JSONL", "GitHub Actions", "Make"],
+    repoUrl: "https://github.com/raovin/mlops-artifact",
     reportUrl: "/work/mlops-readiness-scaffold",
     badges: ["flagship", "offline", "CI gate"],
     priority: "high",
     featured: true,
-    status: "local"
+    status: "public"
   },
   {
     slug: "glyphknit",

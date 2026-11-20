@@ -1,6 +1,6 @@
-# GlyphKnit Portfolio
+# GlyphKnit
 
-Portfolio site for Vin Rao, built with Next.js App Router, TypeScript, and Tailwind CSS.
+Engineering contracting site for GlyphKnit Solutions LLC, with selected projects, a working release-gate demo, and Vin Rao’s public résumé.
 
 ## Commands
 
@@ -31,8 +31,10 @@ http://localhost:3000
 
 ## Content Sources
 
-- Resume facts and metrics come from `canvas` and `folio`.
-- Public project content comes from approved personal repos under `/Users/vin/projects`.
+Use the [logo exploration brief](prompts/logo-exploration.md) for identity studies. Run the [case extraction prompt](prompts/extract-project-cases.md) inside the private source workspace and bring back only the public-safe block. See the [positioning guide](docs/positioning.md) for editorial decisions.
+
+- Résumé facts and project claims come from personal résumés, attributable project records and Vin’s own account. Keep the source documents outside this repository.
+- Describe a team contribution at the level Vin can confirm. Use public company materials for business context and never infer his duties from a product feature.
 - Private infrastructure, raw data, logs, secrets, and local generated output are excluded.
 
 ## Deployment
@@ -40,7 +42,7 @@ http://localhost:3000
 Pushes to `main` run `.github/workflows/deploy.yml`.
 
 The workflow runs `npm ci`, `npm run lint`, `npm run build`, uploads `out/`
-to Mnemosyne, backs up the current live tree, and syncs into `/opt/glyphknit`.
+to the deployment host, backs up the current live tree, and syncs to the configured site directory.
 
 Required GitHub Actions secrets:
 

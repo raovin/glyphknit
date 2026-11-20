@@ -1,312 +1,192 @@
+export type ProjectOrigin = "GlyphKnit project" | "Project engagement" | "Earlier employment" | "Independent project";
+
 export type Project = {
   slug: string;
   title: string;
   summary: string;
+  origin: ProjectOrigin;
+  sector: string;
   context: string;
-  problem: string;
+  problem?: string;
   role: string;
-  constraints: string[];
-  approach: string;
-  tooling: string[];
-  challenges: string;
+  decision?: string;
   impact: string[];
-  proves: string;
-  recruiterTakeaway: string;
-  emTakeaway: string;
+  evidence?: string;
+  relatedSlugs: string[];
   repoUrl?: string;
   demoUrl?: string;
-  reportUrl?: string;
-  images: string[];
   featured: boolean;
-  nda: boolean;
 };
 
 export const projects: Project[] = [
   {
-    slug: "connected-device-test-infrastructure",
-    title: "Connected-device Test Infrastructure",
-    summary:
-      "Playwright and Selenium suites for React/TypeScript device registration, authentication, and multi-locale flows, backed by Jenkins quality gates.",
-    context:
-      "QA automation work at Philip Morris International on a connected-device platform.",
-    problem:
-      "Registration, authentication, and localization flows needed repeatable coverage across modern React/TypeScript surfaces without growing manual test-authoring work.",
-    role:
-      "Built UI/UX automation suites, expanded coverage with LLM-assisted test generation, and integrated automated checks into Jenkins quality gates.",
-    constraints: [
-      "Multi-locale behavior had to stay legible to product and engineering teams.",
-      "Coverage needed to scale without adding headcount.",
-      "Tests had to move defect detection earlier than staging."
-    ],
-    approach:
-      "Combined Playwright and Selenium coverage for critical UI journeys, used AI-assisted case expansion where it saved time, and tied the suites to Jenkins so failures became part of sprint feedback.",
-    tooling: ["Playwright", "Selenium", "TypeScript", "Python", "Jenkins", "GitHub Actions"],
-    challenges:
-      "The useful line was not simply generating more tests. The work was making generated coverage maintainable enough to trust inside delivery pipelines.",
+    slug: "cloud-backed-sdet-frameworks",
+    title: "Browser and API tests for a cloud application",
+    summary: "I built test frameworks that helped locate failures across user journeys, services, and cloud environments.",
+    origin: "GlyphKnit project",
+    sector: "Cloud software",
+    context: "Independent consulting delivered through GlyphKnit for cloud-backed applications and their service integrations.",
+    problem: "A failed browser journey could originate in the application, a service, permissions, or the cloud environment. The tests needed to help locate the cause.",
+    role: "I built Playwright and Cypress frameworks and Python API checks, then investigated failures across browsers, services, Linux hosts, and cloud configuration.",
+    decision: "I separated focused API and integration checks from full browser journeys. This let the team check a service directly when a broken UI flow would otherwise obscure the cause.",
     impact: [
-      "Reduced manual test-authoring time by 60%.",
-      "Scaled coverage for device registration, authentication, and multi-locale flows without adding headcount.",
-      "Moved defect feedback into Jenkins quality gates before stories reached staging."
+      "Test execution time fell by 70% during the engagement.",
+      "Automated coverage reached 70% in six months."
     ],
-    proves:
-      "Can turn complex product journeys into maintainable release checks while using AI as a practical accelerator.",
-    recruiterTakeaway:
-      "Direct match for senior QA automation and SDET roles using Playwright, Selenium, TypeScript, and CI/CD gates.",
-    emTakeaway:
-      "Shows judgment around where LLM-assisted testing helps and where pipeline reliability still has to be engineered.",
-    images: ["/images/glyphknit-system.svg"],
-    featured: true,
-    nda: true
+    evidence: "Engagement outcomes are summarized here. Client code and reports remain private.",
+    relatedSlugs: ["financial-data-quality-platform", "mlops-readiness-scaffold"],
+    featured: true
   },
   {
     slug: "financial-data-quality-platform",
-    title: "Financial Data Platform Quality Automation",
-    summary:
-      "Python, Java, Postman/Newman, MySQL, and Pandas checks for ingestion, data integrity, access control, and payment-data APIs.",
-    context:
-      "QA Analyst and Support Engineer work at Revelate Corp on a multi-tenant financial data storage platform.",
-    problem:
-      "Manual regression and data checks were too slow for a platform handling ingestion, payment-data rules, transformations, and access-control behavior.",
-    role:
-      "Built test suites, API collections, data validation scripts, and Jenkins automation for regression evidence.",
-    constraints: [
-      "Financial data checks had to verify accuracy, consistency, and business rules.",
-      "API coverage needed to replace a manual regression cycle.",
-      "Failures had to point to ingestion, transformation, or access-control causes."
-    ],
-    approach:
-      "Built Python and Java suites for data and access-control validation, created Postman collections for REST endpoints, automated runs with Newman in Jenkins, and used MySQL/Pandas scripts for deeper data verification.",
-    tooling: ["Python", "Java", "Postman", "Newman", "Jenkins", "MySQL", "Pandas", "AWS"],
-    challenges:
-      "The system required API and data checks to work together. A passing endpoint was not enough if transformations or business rules corrupted the output.",
+    title: "Cutting CI feedback from three hours to 25 minutes",
+    summary: "I combined API regression tests with database checks so successful requests also had to produce correct data.",
+    origin: "Earlier employment",
+    sector: "Financial data",
+    context: "QA and support engineering for a multi-tenant financial data platform, before my independent GlyphKnit work.",
+    problem: "Manual regression took too long, and an endpoint returning successfully did not establish that ingestion, transformation, or access rules were correct.",
+    role: "I built Python and Java regression suites, Postman collections, and MySQL/Pandas data checks. I automated them with Newman and streamlined their Jenkins execution.",
+    decision: "I paired API assertions with checks on the resulting data, then ran independent checks in parallel. This kept ingestion, transformation, and tenant access rules in scope while shortening the feedback cycle.",
     impact: [
-      "Reduced manual testing effort by 80%.",
-      "Developed 200+ Postman API collections for payment-data endpoints and business rules.",
-      "Compressed Jenkins feedback from 3 hours to 25 minutes through pipeline streamlining and parallel execution."
+      "Jenkins feedback fell from three hours to 25 minutes after streamlining and parallel execution.",
+      "Manual testing effort fell by 80% in this role."
     ],
-    proves:
-      "Can validate APIs, data paths, business rules, and CI evidence in one coherent quality system.",
-    recruiterTakeaway:
-      "Strong evidence for API testing, data validation, Python automation, and CI/CD testing roles.",
-    emTakeaway:
-      "This is the clearest proof of quality engineering beyond browser automation: data correctness, regression design, and build feedback.",
-    images: ["/images/glyphknit-system.svg"],
-    featured: true,
-    nda: false
-  },
-  {
-    slug: "cloud-backed-sdet-frameworks",
-    title: "Cloud-backed SDET Frameworks",
-    summary:
-      "Playwright, Cypress, Python, Postman, and Requests frameworks across AWS and Azure services, with test execution and coverage improvements.",
-    context:
-      "Independent SDET consulting delivered directly through GlyphKnit Solutions LLC.",
-    problem:
-      "Cloud-backed systems needed E2E, API, integration, and access-control checks that could survive real deployment environments.",
-    role:
-      "Built frameworks from scratch, validated distributed services, investigated server-side defects, and contributed to CI/CD quality gates.",
-    constraints: [
-      "Automation had to run against Linux-based cloud infrastructure.",
-      "UI, API, and integration checks needed to support each other.",
-      "Defect investigation crossed browser, API, CLI, SSH, and environment boundaries."
-    ],
-    approach:
-      "Built hybrid UI/API frameworks with Playwright, Cypress, Python, Postman, and Requests, then validated microservice integrations, data flows, access-control policies, and cloud configuration across AWS and Azure.",
-    tooling: ["Playwright", "Cypress", "Python", "Postman", "Requests", "AWS", "Azure", "Docker", "Linux"],
-    challenges:
-      "The work sat between automation, infrastructure, and support. The framework had to help identify environment and service issues, not only UI failures.",
-    impact: [
-      "Reduced test execution time by 70%.",
-      "Reached 70% automated test coverage in 6 months.",
-      "Caught 40% more pre-production defects through improved testing methodology."
-    ],
-    proves:
-      "Can build SDET infrastructure from scratch and connect it to cloud-backed delivery workflows.",
-    recruiterTakeaway:
-      "Shows application-code fluency, cloud testing, API testing, and practical defect investigation.",
-    emTakeaway:
-      "Useful for teams that need a quality engineer who can debug across the UI, API, pipeline, and host environment.",
-    images: ["/images/glyphknit-system.svg"],
-    featured: true,
-    nda: false
-  },
-  {
-    slug: "global-beverage-qa-automation",
-    title: "Global Beverage Platform Automation",
-    summary:
-      "Reusable Playwright and pytest automation for UI regression, access control, REST integrations, authentication, and multi-market localization.",
-    context:
-      "QA automation work at Carlsberg Group on a global beverage platform.",
-    problem:
-      "A predominantly manual test suite needed reusable automation and clearer quality reporting across global delivery teams.",
-    role:
-      "Led the shift toward Playwright and pytest modules, validated API and access-control paths, and maintained test libraries as requirements changed.",
-    constraints: [
-      "Different markets needed localized coverage without duplicating the entire suite.",
-      "Authentication and role-based access controls had to be validated across product flows.",
-      "Stakeholders needed readable quality reports, not raw automation noise."
-    ],
-    approach:
-      "Built reusable modules for UI regression, access control, and localization, paired them with REST/API validation, and used review of stories and technical docs to provide earlier testability feedback.",
-    tooling: ["Playwright", "pytest", "REST APIs", "Postman", "Swagger", "Python", "Jira", "Confluence"],
-    challenges:
-      "The automation needed to support evolving product requirements across markets while staying maintainable for global delivery teams.",
-    impact: [
-      "Moved a predominantly manual suite toward reusable Playwright and pytest automation.",
-      "Improved quality visibility across global teams with test strategy and stakeholder reports.",
-      "Validated REST integrations, authentication flows, role-based access, and localization."
-    ],
-    proves:
-      "Can build automation strategy and reusable implementation for multi-team, multi-market delivery.",
-    recruiterTakeaway:
-      "Strong evidence for QA automation roles that need UI, API, access-control, and stakeholder reporting experience.",
-    emTakeaway:
-      "Shows how automation can become a shared quality system instead of a brittle local test pile.",
-    images: ["/images/glyphknit-system.svg"],
-    featured: false,
-    nda: true
-  },
-  {
-    slug: "dotnet-bdd-it-automation",
-    title: ".NET BDD and IT Automation",
-    summary:
-      "Cucumber and SpecFlow BDD frameworks plus PowerShell/Bash automation for Azure provisioning, permissions, and onboarding.",
-    context:
-      "IT Specialist and Support/QA work at Audley Travel, a travel-sector software environment.",
-    problem:
-      "Business requirements, .NET application behavior, and IT provisioning work needed more repeatable validation and less manual support load.",
-    role:
-      "Built BDD frameworks, collaborated with developers before code was complete, and automated recurring Azure administration workflows.",
-    constraints: [
-      "Tests had to bridge business-readable requirements and developer implementation.",
-      "Provisioning and permissions work had to be dependable enough for support operations.",
-      "The work mixed QA, support, IT automation, and application understanding."
-    ],
-    approach:
-      "Created Cucumber and SpecFlow feature coverage for .NET applications and wrote PowerShell/Bash scripts for Azure provisioning, permissions management, and onboarding.",
-    tooling: ["Cucumber", "SpecFlow", "C#", ".NET", "Selenium", "PowerShell", "Bash", "Azure"],
-    challenges:
-      "The BDD layer needed to stay useful to both business and engineering stakeholders while support scripts reduced recurring operational drag.",
-    impact: [
-      "Built 150+ BDD feature files for .NET applications.",
-      "Developed 20+ PowerShell scripts.",
-      "Eliminated 15+ hours of manual work per week and reduced issue resolution time by 3x."
-    ],
-    proves:
-      "Can connect test automation, support engineering, and practical scripting to remove operational friction.",
-    recruiterTakeaway:
-      "Good early-career evidence for C#/.NET, BDD, Selenium, Azure, and support-aware QA work.",
-    emTakeaway:
-      "Shows a durable pattern: turn repeated support pain into executable checks and scripts.",
-    images: ["/images/glyphknit-system.svg"],
-    featured: false,
-    nda: false
+    evidence: "The timing and effort figures describe this role's regression workflow. Source and internal reports are private.",
+    relatedSlugs: ["cloud-backed-sdet-frameworks", "health-dashboard"],
+    featured: true
   },
   {
     slug: "mlops-readiness-scaffold",
-    title: "MLOps Readiness Scaffold",
-    summary:
-      "A deterministic release gate for model or API behavior, built as an offline QA-to-MLOps portfolio artifact.",
-    context:
-      "Personal showcase project that maps QA automation patterns onto ML and data-system release checks.",
-    problem:
-      "Model behavior can drift into subjective review. The useful engineering shape is a repeatable gate: versioned cases, provider boundaries, deterministic assertions, thresholds, and report evidence.",
-    role:
-      "Designed and implemented the harness, sample cases, provider boundary, readiness thresholding, JSON report shape, tests, and CI workflow.",
-    constraints: [
-      "No paid APIs, secrets, network calls, or model downloads.",
-      "Small enough for reviewers to run locally.",
-      "Clear extension points for real model providers and stricter production gates."
-    ],
-    approach:
-      "Converted expected behavior into JSONL eval cases, routed outputs through a swappable provider, evaluated text and structured JSON expectations, and surfaced a CI-friendly pass/fail readiness result.",
-    tooling: ["Python", "unittest", "JSONL", "GitHub Actions", "Make", "CI quality gate"],
-    challenges:
-      "The artifact had to prove the release-gate shape without pretending five sample cases are a production model benchmark.",
+    title: "A repeatable model-output release gate",
+    summary: "I built a small evaluation harness that checks expected outputs and gives a release pipeline a clear pass or fail.",
+    origin: "Independent project",
+    sector: "Model evaluation",
+    context: "A self-directed Python project exploring how QA release checks apply to model and API outputs. The browser demo is a separate implementation of the same idea.",
+    problem: "Reviewing output by eye makes it hard to repeat a release decision. I wanted expected behavior, the threshold, and the result to be inspectable in one small system.",
+    role: "I built the Python case loader, provider interface, text and JSON checks, release threshold, reports, tests, and CI workflow.",
+    decision: "I included a deliberately weak provider alongside the passing example. Running both verifies that the gate can block a release, with a report and exit code explaining the result. The harness runs offline without API keys or model downloads.",
     impact: [
-      "Offline reviewer path runs without secrets, paid APIs, network calls, or model downloads.",
-      "Repo evidence: local-only eval path, JSON report artifact, failing baseline command, and unit coverage for loader, metrics, JSON contracts, and report metadata."
+      "The repository can run a passing gate and an intentionally blocked baseline offline.",
+      "The browser demo lets visitors edit cases and thresholds without installing the Python project."
     ],
-    proves:
-      "Quality engineering can become ML quality work when acceptance criteria, release evidence, and CI gates are designed around model behavior.",
-    recruiterTakeaway:
-      "Shows a credible bridge from SDET work into ML testing, data validation, and MLOps quality without overclaiming model expertise.",
-    emTakeaway:
-      "Useful pattern for teams that need lightweight eval gates before they invest in a full ML platform stack.",
+    evidence: "The public repository contains the Python harness, five sample cases, tests, and CI configuration. The browser demo uses six synthetic cases and deterministic responses. Neither is a production model benchmark.",
+    relatedSlugs: ["cloud-backed-sdet-frameworks", "financial-data-quality-platform"],
     repoUrl: "https://github.com/raovin/mlops-artifact",
-    images: ["/images/glyphknit-system.svg"],
-    featured: false,
-    nda: false
+    demoUrl: "/demos/eval-gate/",
+    featured: true
+  },
+  {
+    slug: "connected-device-test-infrastructure",
+    title: "Testing registration without waiting for email or SMS",
+    summary: "I separated the part of sign-in that the browser handles from the service that sends a one-time code.",
+    origin: "Project engagement",
+    sector: "Consumer software",
+    context: "Registration and sign-in for a consumer product used in several markets.",
+    problem: "When a one-time code arrived late, a browser test could fail even when the registration screen worked.",
+    role: "I built Playwright tests for registration and sign-in across locales and added them to Jenkins.",
+    decision: "For checks of the browser flow, I supplied the verification service’s response in the test. That let me check how the screen handled a code without depending on a live inbox or phone.",
+    impact: [
+      "The team could rerun the same registration scenario in the pipeline regardless of message delivery time."
+    ],
+    relatedSlugs: ["global-beverage-qa-automation", "mlops-readiness-scaffold"],
+    demoUrl: "/demos/registration-checks/",
+    featured: false
+  },
+  {
+    slug: "global-beverage-qa-automation",
+    title: "Finding gaps in checkout test coverage",
+    summary: "I mapped ordering tests to product requirements so the team could see which checkout rules a passing run had exercised.",
+    origin: "Project engagement",
+    sector: "Ordering software",
+    context: "A platform where businesses place orders across several markets.",
+    problem: "A checkout test could pass while a promotion or a local ordering rule went untested.",
+    role: "I maintained the cart, checkout and account tests in Robot Framework and Playwright.",
+    decision: "I linked the checks to individual requirements. In release reports I called out requirements without a test and tests that gave inconsistent results across runs.",
+    impact: [
+      "Engineering teams in different markets could see what had been checked and where they still needed to investigate."
+    ],
+    relatedSlugs: ["connected-device-test-infrastructure", "cloud-backed-sdet-frameworks"],
+    featured: false
+  },
+  {
+    slug: "hiring-platform-release-testing",
+    title: "Browser testing for a hiring platform",
+    summary: "I built a Playwright framework to automate browser checks the team had been running by hand.",
+    origin: "Project engagement",
+    sector: "Recruitment software",
+    context: "A web application for employers recruiting frontline staff.",
+    role: "I built the team's browser test framework in TypeScript and Playwright. I also tested changes manually and wrote release notes describing what had changed.",
+    impact: [
+      "The team could rerun the same browser checks for successive releases, reducing the amount of testing it had to repeat by hand."
+    ],
+    relatedSlugs: ["connected-device-test-infrastructure", "cloud-backed-sdet-frameworks"],
+    featured: false
+  },
+  {
+    slug: "insurance-brokerage-app",
+    title: "Building an insurance app for a brokerage",
+    summary: "I worked on the team that built an insurance app for a broker serving individuals and businesses.",
+    origin: "Project engagement",
+    sector: "Insurance software",
+    context: "The brokerage helps people and businesses choose coverage from insurers.",
+    role: "I was part of the team that built its insurance application.",
+    impact: [],
+    relatedSlugs: ["hiring-platform-release-testing", "connected-device-test-infrastructure"],
+    featured: false
   },
   {
     slug: "health-dashboard",
-    title: "Personal Health Dashboard",
-    summary:
-      "A full-stack health dashboard for lab results, wearable data, custom ranges, score snapshots, and authenticated exports.",
-    context:
-      "Personal showcase app built as a private data product with serious auth, database, and validation boundaries.",
-    problem:
-      "Lab and wearable data becomes hard to inspect when values, units, freshness, ranges, and partial coverage all live in separate systems.",
-    role:
-      "Built the Next.js app, database schema, auth routes, upload/export paths, scoring logic, seed harnesses, and focused route/unit tests.",
-    constraints: [
-      "Health data needs authenticated access and export paths.",
-      "Scores must avoid false precision when inputs are stale or partial.",
-      "Local smoke testing needs a repeatable database fixture."
-    ],
-    approach:
-      "Modeled metrics, categories, lab reports, wearable days, custom ranges, providers, and export endpoints in Postgres through Drizzle, then wrapped the product flows with unit, route, DB, and Playwright smoke coverage.",
-    tooling: ["Next.js", "TypeScript", "Postgres", "Drizzle ORM", "Vitest", "Playwright", "Railway"],
-    challenges:
-      "The scoring model had to communicate partial-data states instead of inventing certainty from incomplete coverage.",
+    title: "Making personal health data inspectable",
+    summary: "I built a private application for lab and wearable data, with authenticated exports and explicit handling of incomplete inputs.",
+    origin: "Independent project",
+    sector: "Personal data",
+    context: "A self-directed full-stack application. It is a private personal tool, separate from client work.",
+    problem: "Results from different sources are hard to compare when units, dates, reference ranges, and missing values are scattered across systems.",
+    role: "I built the Next.js application and Postgres data model, including authenticated uploads and exports, scoring, and route and browser tests.",
+    decision: "I made freshness and partial coverage part of each score state. A score needs to show when its inputs are stale or incomplete, so missing data does not quietly appear complete. Seeded fixtures let me check these paths without using personal records.",
     impact: [
-      "Private demo evidence: authenticated product surface for lab data, wearable summaries, custom ranges, score states, and export paths.",
-      "Repo evidence: auth/API route tests, migration tests, local Postgres smoke scripts, seeded browser smoke path, and export endpoints."
+      "Lab results, wearable summaries, ranges, and exports sit behind one authenticated application.",
+      "Seeded checks exercise product flows and score states for stale and incomplete inputs."
     ],
-    proves:
-      "Can ship application code while bringing SDET judgment into schema design, auth, data validation, and release checks.",
-    recruiterTakeaway:
-      "Demonstrates that the SDET positioning is not limited to test code. This is a working full-stack product surface.",
-    emTakeaway:
-      "Shows careful handling of data freshness, scoring confidence, and repeatable local verification.",
-    images: ["/images/glyphknit-system.svg"],
-    featured: false,
-    nda: false
+    evidence: "This write-up describes a private implementation. Personal records are excluded from the portfolio.",
+    relatedSlugs: ["financial-data-quality-platform", "paperwake"],
+    featured: false
   },
   {
     slug: "paperwake",
-    title: "Paperwake Document Archive",
-    summary:
-      "A portable document migration and archive stack using Paperless-ngx, Docker services, encrypted backup, and migration runbooks.",
-    context:
-      "Personal infrastructure project for moving document scanning and archiving away from Microsoft services.",
-    problem:
-      "Personal documents need searchable PDFs, exportable metadata, portable storage, and backup/restore confidence without depending on a single consumer cloud product.",
-    role:
-      "Designed the local and production Docker shape, migration documentation, backup/restore notes, and operational runbooks.",
-    constraints: [
-      "Private documents and imports stay out of version control.",
-      "The archive must remain boring, portable, and recoverable.",
-      "ML additions must not make source-of-truth document records untrustworthy."
-    ],
-    approach:
-      "Used Paperless-ngx as the archive and metadata layer, Postgres and Redis for backing services, Caddy for production routing, and BorgBackup/Storage Box planning for encrypted offsite backup.",
-    tooling: ["Docker Compose", "Paperless-ngx", "Postgres", "Redis", "Caddy", "BorgBackup"],
-    challenges:
-      "The project balances migration automation with strict separation between safe repo documentation and private source files.",
+    title: "A portable document archive",
+    summary: "I designed a document migration and archive setup around searchable files, portable metadata, and recovery planning.",
+    origin: "Independent project",
+    sector: "Document infrastructure",
+    context: "A personal infrastructure project for moving a document archive away from a consumer cloud service.",
+    problem: "An archive needs to remain useful when its storage or hosting changes. Searchable documents, metadata export, and a recovery plan matter as much as initial import.",
+    role: "I designed a Docker layout around Paperless-ngx, Postgres, and Redis, and wrote migration, deployment, and backup/restore runbooks.",
+    decision: "I separated portable configuration and operating instructions from private document imports. This keeps the service design reusable when hosting changes, while the recovery plan covers both document files and metadata.",
     impact: [
-      "Operational evidence: documented local stack, production shape, migration runbook, backup planning, and private-source separation.",
-      "Repo evidence: architecture docs, backup/restore docs, migration runbook, local disposable stack, and production deployment notes."
+      "The project has a documented service layout and migration path.",
+      "An encrypted offsite backup and restore plan is recorded alongside operating instructions."
     ],
-    proves:
-      "Can turn a messy real-world migration into a documented, testable, recoverable system.",
-    recruiterTakeaway:
-      "Shows systems thinking beyond UI automation: infrastructure, data portability, privacy, and runbooks.",
-    emTakeaway:
-      "The clean separation between source data and repo docs is exactly the kind of judgment production teams need.",
-    images: ["/images/glyphknit-system.svg"],
-    featured: false,
-    nda: false
+    evidence: "The documented result is a service design and runbooks. Backup planning is complete; a verified recovery exercise is not claimed.",
+    relatedSlugs: ["health-dashboard", "dotnet-bdd-it-automation"],
+    featured: false
+  },
+  {
+    slug: "dotnet-bdd-it-automation",
+    title: "Turning repeat work into tests and scripts",
+    summary: "I wrote business-readable .NET tests and automated recurring provisioning, permissions, and onboarding tasks.",
+    origin: "Earlier employment",
+    sector: "Travel software",
+    context: "An earlier role spanning IT support and quality assurance in a travel-sector software environment.",
+    problem: "Application requirements needed repeatable checks, while recurring administration work consumed support time.",
+    role: "I built Cucumber and SpecFlow coverage for .NET applications and wrote PowerShell and Bash scripts for Azure provisioning, permissions, and onboarding.",
+    decision: "I worked with developers on business-readable feature scenarios before implementation was complete. Agreeing on observable behavior early gave the tests a clear purpose; recurring administration work became repeatable scripts.",
+    impact: [
+      "Built more than 150 BDD feature files and 20 PowerShell scripts.",
+      "Automation removed more than 15 hours of manual work per week in this role."
+    ],
+    evidence: "The feature-file, script, and time-saving figures describe this earlier role. Application code and operational scripts remain private.",
+    relatedSlugs: ["paperwake", "cloud-backed-sdet-frameworks"],
+    featured: false
   }
 ];
 

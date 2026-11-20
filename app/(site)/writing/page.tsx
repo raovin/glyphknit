@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { buildMetadata } from "@/lib/metadata";
 
@@ -6,7 +7,7 @@ export const metadata: Metadata = {
   ...buildMetadata({
     title: "Writing",
     description:
-      "Writing scaffold for Vin Rao. Hidden from navigation until three posts exist.",
+      "Project notes from GlyphKnit.",
     path: "/writing"
   }),
   robots: {
@@ -19,11 +20,9 @@ export default function WritingPage() {
   return (
     <section className="reading-shell py-16 md:py-24">
       <p className="mono-label">Writing</p>
-      <h1 className="mt-4 text-4xl md:text-5xl">Writing is parked for now</h1>
+      <h1 className="mt-4 text-4xl md:text-5xl">Project notes</h1>
       <p className="mt-5 text-lg text-[var(--muted)]">
-        Work samples, repo evidence, and the resume page are the current source
-        of truth. Writing can join the navigation once there is a small body of
-        public posts worth indexing.
+        Read the <Link className="focus-link" href="/work/">case studies</Link> for notes on the work and the decisions behind it.
       </p>
     </section>
   );

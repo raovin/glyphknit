@@ -1,69 +1,52 @@
-import { Github, Linkedin, Mail } from "lucide-react";
 import type { Metadata } from "next";
+import Link from "next/link";
+import { Suspense } from "react";
 
-import { ButtonLink } from "@/components/button-link";
-import { ContactForm } from "@/components/contact-form";
-import { Section } from "@/components/section";
+import { ContactForm, ContactInquiryForm } from "@/components/contact-form";
+import { projects } from "@/content/projects/projects";
 import { siteConfig } from "@/content/site";
 import { buildMetadata } from "@/lib/metadata";
 
+import styles from "../home.module.css";
+
 export const metadata: Metadata = buildMetadata({
-  title: "Contact",
+  title: "Discuss a project",
   description:
-    "Contact Vin Rao for senior QA, SDET, ML-quality, test automation, API testing, CI/CD testing, and data validation work.",
-  path: "/contact"
+    "Talk to Vin Rao at GlyphKnit about test automation, release pipelines, API validation, or a scoped engineering project.",
+  path: "/contact",
 });
 
 export default function ContactPage() {
   return (
-    <>
-      <section className="reading-shell py-16 md:py-24">
-        <p className="mono-label">Contact</p>
-        <h1 className="mt-4 text-4xl md:text-5xl">
-          Hiring for QA, SDET or ML-quality, or need a contract engineer?
-        </h1>
-        <p className="mt-5 text-lg text-[var(--muted)]">{siteConfig.availability}</p>
+    <div className="site-shell">
+      <section className={styles.innerHero}>
+        <h1>Discuss your project.</h1>
+        <p>
+          What would you like to fix? A short description is enough. Include a deadline if you have one.
+        </p>
       </section>
-
-      <Section>
-        <div className="grid gap-5 md:grid-cols-[1fr_0.8fr]">
-          <ContactForm />
-          <div className="grid gap-5">
-            <article className="hairline-card p-6">
-              <h2 className="text-2xl">Email</h2>
-              <p className="mt-4 font-mono text-lg text-[var(--paper)]">{siteConfig.email}</p>
-              <p className="mt-4 text-sm text-[var(--muted)]">
-                Best first note: role or problem, stack, timing, and what has already
-                been tried.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <ButtonLink
-                  href={`mailto:${siteConfig.email}`}
-                  icon={<Mail aria-hidden="true" size={17} />}
-                  variant="primary"
-                >
-                  Email
-                </ButtonLink>
-                <ButtonLink href={siteConfig.githubUrl} icon={<Github aria-hidden="true" size={17} />}>
-                  GitHub
-                </ButtonLink>
-                <ButtonLink href={siteConfig.linkedinUrl} icon={<Linkedin aria-hidden="true" size={17} />}>
-                  LinkedIn
-                </ButtonLink>
-              </div>
-            </article>
-            <aside className="hairline-card p-6">
-              <h2 className="text-2xl">Public links</h2>
-              <div className="mt-5 grid gap-3 text-sm text-[var(--muted)]">
-                <p>GitHub: {siteConfig.githubUrl}</p>
-                <p id="linkedin">LinkedIn: {siteConfig.linkedinUrl}</p>
-                <p>Resume page: {siteConfig.resumePageHref}</p>
-                <p>Resume: {siteConfig.resumeHref}</p>
-              </div>
-            </aside>
+      <div className={styles.contactLayout}>
+        <Suspense fallback={<ContactForm nativeOnly />}>
+          <ContactInquiryForm
+            projects={projects.map(({ slug, title }) => ({ slug, title }))}
+          />
+        </Suspense>
+        <aside className={styles.contactDetails}>
+          <h2>Prefer a direct email?</h2>
+          <a className={styles.email} href={`mailto:${siteConfig.email}`}>
+            {siteConfig.email}
+          </a>
+          <div className={styles.socialLinks}>
+            <a href={siteConfig.githubUrl} rel="noreferrer" target="_blank">
+              GitHub ↗
+            </a>
+            <a href={siteConfig.linkedinUrl} rel="noreferrer" target="_blank">
+              LinkedIn ↗
+            </a>
+            <Link href={siteConfig.resumePageHref}>Resume ↗</Link>
           </div>
-        </div>
-      </Section>
-    </>
+        </aside>
+      </div>
+    </div>
   );
 }

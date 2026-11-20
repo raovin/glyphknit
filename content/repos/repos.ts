@@ -1,107 +1,43 @@
-export type RepoPriority = "high" | "medium" | "low";
-
 export type Repo = {
   slug: string;
   name: string;
   description: string;
-  proves: string;
-  stack: string[];
   repoUrl?: string;
   demoUrl?: string;
   reportUrl?: string;
-  badges: string[];
-  priority: RepoPriority;
-  featured: boolean;
-  status?: "public" | "private" | "planned" | "local";
+  kind: "Public source" | "Private project";
 };
 
 export const repos: Repo[] = [
   {
     slug: "mlops-artifact",
-    name: "mlops-artifact",
-    description:
-      "Offline model/API evaluation harness with versioned cases, provider boundary, deterministic checks, readiness thresholds, and JSON evidence.",
-    proves:
-      "MLOps quality gate design, testable model behavior, structured output validation, and CI-friendly reporting.",
-    stack: ["Python", "unittest", "JSONL", "GitHub Actions", "Make"],
+    name: "Model-output release gate",
+    description: "An offline Python test suite for model outputs. Run the weak baseline to see which cases block the release.",
     repoUrl: "https://github.com/raovin/mlops-artifact",
-    reportUrl: "/work/mlops-readiness-scaffold",
-    badges: ["flagship", "offline", "CI gate"],
-    priority: "high",
-    featured: true,
-    status: "public"
+    demoUrl: "/demos/eval-gate/",
+    reportUrl: "/work/mlops-readiness-scaffold/",
+    kind: "Public source"
   },
   {
     slug: "glyphknit",
-    name: "glyphknit",
-    description:
-      "Static Next.js portfolio deployed behind Nginx Proxy Manager with HTTPS, route-level metadata, sitemap, and resume-backed case studies.",
-    proves:
-      "Public source for the portfolio itself: static export, responsive UI, SEO metadata, deployment automation, and production hosting hygiene.",
-    stack: ["Next.js", "TypeScript", "Tailwind CSS", "GitHub Actions", "Nginx"],
+    name: "This website",
+    description: "The source for this site, including the in-browser demo and the workflow that builds and deploys the static pages.",
     repoUrl: "https://github.com/raovin/glyphknit",
-    demoUrl: "https://glyphknit.com",
-    badges: ["public source", "static export", "HTTPS"],
-    priority: "high",
-    featured: true,
-    status: "public"
+    demoUrl: "/demos/",
+    kind: "Public source"
   },
   {
     slug: "health-dashboard",
-    name: "health-dashboard",
-    description:
-      "Authenticated Next.js app for lab results, wearable data, custom ranges, scoring states, and CSV/JSON exports.",
-    proves:
-      "Full-stack application code with database modeling, auth, data validation, tests, and Playwright smoke coverage.",
-    stack: ["Next.js", "TypeScript", "Postgres", "Drizzle", "Vitest", "Playwright"],
-    reportUrl: "/work/health-dashboard",
-    badges: ["full-stack", "tested", "data"],
-    priority: "high",
-    featured: true,
-    status: "private"
+    name: "Personal health dashboard",
+    description: "I built a dashboard for lab and wearable data, with tests for how it scores incomplete or stale inputs.",
+    reportUrl: "/work/health-dashboard/",
+    kind: "Private project"
   },
   {
     slug: "paperwake",
-    name: "paperwake",
-    description:
-      "Document archive migration project with Paperless-ngx, Docker services, encrypted-backup planning, and migration runbooks.",
-    proves:
-      "Infrastructure documentation, data portability, privacy boundaries, and recoverable system design.",
-    stack: ["Docker", "Paperless-ngx", "Postgres", "Redis", "Caddy", "BorgBackup"],
-    reportUrl: "/work/paperwake",
-    badges: ["infra", "runbooks", "privacy"],
-    priority: "medium",
-    featured: false,
-    status: "private"
-  },
-  {
-    slug: "canvas",
-    name: "canvas",
-    description:
-      "LaTeX resume source with variants, archive verification, generated PDFs, and targeted ATS text outputs.",
-    proves:
-      "Document build automation, variant management, verification scripts, and clean generated-artifact hygiene.",
-    stack: ["LaTeX", "LuaLaTeX", "Python", "Make", "Shell"],
-    reportUrl: "/resume",
-    badges: ["automation", "docs"],
-    priority: "medium",
-    featured: false,
-    status: "private"
-  },
-  {
-    slug: "folio",
-    name: "folio",
-    description:
-      "Resume and cover-letter source repo with a GitHub Actions workflow that builds market-specific PDFs.",
-    proves:
-      "CI-backed document generation and source-controlled professional artifacts.",
-    stack: ["LaTeX", "GitHub Actions", "Shell"],
-    reportUrl: "/resume",
-    badges: ["CI", "LaTeX"],
-    priority: "medium",
-    featured: false,
-    status: "private"
+    name: "Document archive",
+    description: "I designed a searchable document archive and wrote the migration plan and operating runbooks.",
+    reportUrl: "/work/paperwake/",
+    kind: "Private project"
   }
 ];
-
-export const featuredRepos = repos.filter((repo) => repo.featured);

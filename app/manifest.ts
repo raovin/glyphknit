@@ -8,8 +8,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "GlyphKnit",
     short_name: "GlyphKnit",
-    description:
-      "Portfolio for Vin Rao, Senior SDET and ML Quality Engineer.",
+    description: siteConfig.description,
     start_url: "/",
     display: "standalone",
     background_color: "#090b0c",

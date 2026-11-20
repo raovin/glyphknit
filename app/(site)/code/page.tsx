@@ -11,47 +11,46 @@ import { buildMetadata } from "@/lib/metadata";
 export const metadata: Metadata = buildMetadata({
   title: "Code",
   description:
-    "Repo showcase cards for Vin Rao covering Playwright, Python, pytest, MLOps quality gates, CI/CD testing, and data validation.",
+    "Source code and implementation notes for independent projects by Vin Rao.",
   path: "/code"
 });
 
 export default function CodePage() {
-  const high = repos.filter((repo) => repo.priority === "high");
-  const medium = repos.filter((repo) => repo.priority === "medium");
+  const publicRepos = repos.filter((repo) => repo.kind === "Public source");
+  const privateProjects = repos.filter((repo) => repo.kind === "Private project");
 
   return (
     <>
       <section className="reading-shell py-16 md:py-24">
-        <p className="mono-label">Code</p>
-        <h1 className="mt-4 text-4xl md:text-5xl">Repository evidence</h1>
-        <p className="mt-5 text-lg text-[var(--muted)]">
-          Public source links appear only when the repository is public. Private
-          and local artifacts point to case-study evidence instead of dead links.
-          Nothing here is a promise of future work.
-        </p>
+        <h1 className="text-4xl md:text-5xl">Code and implementation notes</h1>
         <p className="mt-5">
           <Link
             className="focus-link inline-flex items-center gap-2 text-sm font-semibold"
-            href="/demos/"
+            href="/demos/eval-gate/"
           >
-            Prefer to run something instead? Open the demos
+            Try the browser demo
             <ArrowRight aria-hidden="true" size={16} />
           </Link>
         </p>
       </section>
-      <Section eyebrow="High priority" title="Best proof for the target roles">
+      <Section title="Public repositories">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {high.map((repo) => (
+          {publicRepos.map((repo) => (
             <RepoCard key={repo.slug} repo={repo} />
           ))}
         </div>
       </Section>
-      <Section eyebrow="Medium priority" title="Supporting artifacts">
+      <Section title="Private projects">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {medium.map((repo) => (
+          {privateProjects.map((repo) => (
             <RepoCard key={repo.slug} repo={repo} />
           ))}
         </div>
+      </Section>
+      <Section className="pt-0">
+        <p className="text-[var(--muted)]">
+          For work delivered inside product teams, <Link className="focus-link font-semibold" href="/work/">read the case studies</Link>.
+        </p>
       </Section>
     </>
   );

@@ -1,204 +1,349 @@
-import { ArrowRight, FileDown, Github, Mail, Play } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight, ArrowUpRight, Check, GitBranch, Play } from "lucide-react";
 import Link from "next/link";
 
-import { ButtonLink } from "@/components/button-link";
-import { ExperienceTimeline } from "@/components/experience-timeline";
-import { ImpactList } from "@/components/impact-list";
-import { ProjectCard } from "@/components/project-card";
-import { RepoCard } from "@/components/repo-card";
-import { Section } from "@/components/section";
-import { StackBar } from "@/components/stack-bar";
-import { featuredProjects } from "@/content/projects/projects";
-import { featuredRepos } from "@/content/repos/repos";
-import { experience } from "@/content/experience";
-import {
-  impactItems,
-  primaryStack,
-  siteConfig,
-  stackGroups,
-  workStyle
-} from "@/content/site";
+import { projects } from "@/content/projects/projects";
+import { siteConfig } from "@/content/site";
+
+import styles from "./home.module.css";
 
 export default function HomePage() {
   return (
-    <>
-      <section className="site-shell grid min-h-[calc(100vh-64px)] items-center gap-10 py-14 md:grid-cols-[1.1fr_0.9fr] md:py-20">
-        <div className="reveal">
-          <p className="mono-label">Senior SDET · ML quality · EU remote</p>
-          <h1 className="mt-5 max-w-4xl text-4xl text-balance md:text-6xl">
-            {siteConfig.name} - {siteConfig.primaryTitle}
-          </h1>
-          <p className="mt-5 max-w-2xl text-2xl leading-tight text-[var(--paper)]">
-            Most SDETs test the app. I&apos;ve shipped the app.
+    <div className={styles.home}>
+      <section className={`site-shell ${styles.hero}`}>
+        <p className={styles.eyebrow}>Independent quality engineering</p>
+        <h1>GlyphKnit builds test systems and release pipelines.</h1>
+        <div className={styles.heroBottom}>
+          <p>
+            I&apos;m Vin Rao. I build browser and API tests, check the data they
+            produce, and wire those checks into your release pipeline.
           </p>
-          <p className="mt-5 max-w-2xl text-lg text-[var(--muted)]">
-            Around 9 years building test automation in Python, TypeScript and C#,
-            now extending it to ML and data pipelines.
-          </p>
-          <p className="mt-5 max-w-2xl border-l-2 border-[var(--accent)] pl-4 text-sm text-[var(--text)]">
-            {siteConfig.availability}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <ButtonLink
-              href="/demos/eval-gate/"
-              icon={<Play aria-hidden="true" size={17} />}
-              variant="primary"
+          <div className={styles.heroActions}>
+            <Link className={styles.primaryLink} href="/contact/">
+              Discuss a project <ArrowUpRight size={17} aria-hidden="true" />
+            </Link>
+            <Link
+              className={styles.textLink}
+              href="/work/cloud-backed-sdet-frameworks/"
             >
-              Run a live demo
-            </ButtonLink>
-            <ButtonLink href="/work" icon={<ArrowRight aria-hidden="true" size={17} />}>
-              View work
-            </ButtonLink>
-            <ButtonLink
-              href={siteConfig.resumePageHref}
-              icon={<FileDown aria-hidden="true" size={17} />}
-            >
-              Resume
-            </ButtonLink>
-          </div>
-          <p className="mt-4 max-w-2xl text-sm text-[var(--faint)]">
-            The demo is a working release gate you can operate in the browser. No
-            sign-up, no clone, nothing to install.
-          </p>
-        </div>
-        <div className="hairline-card reveal overflow-hidden p-5">
-          <Image
-            alt="GlyphKnit system diagram"
-            className="h-auto w-full"
-            height={620}
-            priority
-            src="/images/glyphknit-system.svg"
-            width={720}
-          />
-          <div className="mt-5 grid gap-3 border-t border-[var(--line)] pt-5 text-sm text-[var(--muted)]">
-            <p>
-              Test infrastructure, API checks, data validation, and release evidence
-              designed as one system.
-            </p>
+              See the cloud application project{" "}
+              <ArrowUpRight size={18} aria-hidden="true" />
+            </Link>
           </div>
         </div>
       </section>
 
-      <StackBar items={primaryStack} meta={siteConfig.locationLine} />
-
-      <Section
-        description="Resume-backed case studies that show the delivery pattern, impact, and technical surface without relying on private code."
-        eyebrow="01 / Featured projects"
-        id="featured"
-        title="Work that proves the resume"
+      <section
+        className={`site-shell ${styles.featured}`}
+        id="selected-work"
+        aria-labelledby="featured-title"
       >
-        <div className="grid gap-4 lg:grid-cols-3">
-          {featuredProjects.map((project) => (
-            <ProjectCard compact key={project.slug} project={project} />
-          ))}
+        <div className={styles.featuredHeader}>
+          <p className={styles.eyebrow}>Selected work</p>
+          <span className={styles.origin}>
+            GlyphKnit client project · Cloud software
+          </span>
         </div>
-      </Section>
-
-      <Section
-        description="Repo cards separate public source, private-source case studies, and local artifacts. For something you can operate rather than read, start with the live demo."
-        eyebrow="02 / Featured code"
-        title="Code with a review path"
-      >
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {featuredRepos.map((repo) => (
-            <RepoCard key={repo.slug} repo={repo} />
-          ))}
-        </div>
-        <div className="mt-6 flex flex-wrap gap-5">
-          <Link
-            className="focus-link inline-flex items-center gap-2 text-sm font-semibold"
-            href="/demos/eval-gate/"
-          >
-            Run the release-gate demo
-            <ArrowRight aria-hidden="true" size={16} />
-          </Link>
-          <Link className="focus-link inline-flex items-center gap-2 text-sm font-semibold" href="/code">
-            See all code cards
-            <ArrowRight aria-hidden="true" size={16} />
-          </Link>
-        </div>
-      </Section>
-
-      <Section
-        description="Tools pulled from the resume and the approved public repo scan."
-        eyebrow="03 / Technical stack"
-        title="Built around fast, legible release feedback"
-      >
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {stackGroups.map((group) => (
-            <article className="hairline-card p-5" key={group.title}>
-              <h3 className="text-lg">{group.title}</h3>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {group.items.map((item) => (
-                  <span className="chip" key={item}>
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </article>
-          ))}
-        </div>
-      </Section>
-
-      <Section
-        description="Concrete outcomes pulled from the Canvas and Folio resume sources."
-        eyebrow="04 / Impact"
-        title="Resume-backed outcomes"
-      >
-        <ImpactList items={impactItems} />
-      </Section>
-
-      <Section
-        description="A compact timeline of the experience behind the case studies."
-        eyebrow="05 / Resume track record"
-        title="Nine years across automation, APIs, data, and cloud"
-      >
-        <ExperienceTimeline compact items={experience} />
-      </Section>
-
-      <Section eyebrow="06 / Work style" title="Quality as a system">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {workStyle.map((item) => (
-            <article className="hairline-card p-5" key={item}>
-              <p className="text-sm text-[var(--text)]">{item}</p>
-            </article>
-          ))}
-        </div>
-      </Section>
-
-      <Section eyebrow="07 / About" title="A quality engineer who writes product code">
-        <div className="grid gap-6 md:grid-cols-[1fr_0.55fr]">
-          <p className="text-lg text-[var(--muted)]">
-            Physics background from Hamilton College, around 9 years in QA and
-            test engineering across Canada, the United States, and Portugal, and
-            a working habit of shipping side projects. The current direction is
-            quality engineering for ML and data systems: testable behavior,
-            validated data paths, and release evidence a team can trust.
-          </p>
-          <div className="flex items-start md:justify-end">
-            <ButtonLink href="/about" icon={<ArrowRight aria-hidden="true" size={17} />}>
-              Read about
-            </ButtonLink>
+        <div className={styles.featuredBody}>
+          <div className={styles.featuredCopy}>
+            <h2 id="featured-title">
+              <Link href="/work/cloud-backed-sdet-frameworks/">
+                Browser and API tests for a cloud application
+              </Link>
+            </h2>
+            <p>
+              I built browser tests for the main user journeys and separate API
+              checks for the services behind them. When a browser test failed,
+              the team could check the service directly.
+            </p>
+            <Link
+              className={styles.textLink}
+              href="/contact/?project=cloud-backed-sdet-frameworks"
+            >
+              Discuss a similar project{" "}
+              <ArrowUpRight size={18} aria-hidden="true" />
+            </Link>
           </div>
+          <figure className={styles.clientFigure}>
+            <div className={styles.testScope}>
+              <div>
+                <span>Browser journeys</span>
+                <strong>Playwright + Cypress</strong>
+              </div>
+              <div>
+                <span>Service checks</span>
+                <strong>Python API tests</strong>
+              </div>
+            </div>
+            <div className={styles.clientResult}>
+              <strong>
+                70<span>%</span>
+              </strong>
+              <span>reduction in test execution time</span>
+            </div>
+            <figcaption>
+              Client engagement outcome. Code and reports remain private.
+            </figcaption>
+          </figure>
         </div>
-      </Section>
+      </section>
 
-      <Section className="pb-10" eyebrow="08 / Contact" title="Hiring for QA, SDET or ML-quality, or need a contract engineer? Let&apos;s talk.">
-        <div className="flex flex-wrap gap-3">
-          <ButtonLink
-            href={`mailto:${siteConfig.email}`}
-            icon={<Mail aria-hidden="true" size={17} />}
-            variant="primary"
-          >
-            Email
-          </ButtonLink>
-          <ButtonLink href={siteConfig.githubUrl} icon={<Github aria-hidden="true" size={17} />}>
-            GitHub
-          </ButtonLink>
-          <ButtonLink href={siteConfig.linkedinUrl}>LinkedIn</ButtonLink>
+      <section
+        className={`site-shell ${styles.featured} ${styles.previousWork}`}
+        aria-labelledby="financial-title"
+      >
+        <div className={styles.featuredHeader}>
+          <p className={styles.eyebrow}>Release engineering</p>
+          <span className={styles.origin}>
+            Financial data platform · Earlier employment
+          </span>
         </div>
-      </Section>
-    </>
+        <div className={styles.featuredBody}>
+          <div className={styles.featuredCopy}>
+            <h2 id="financial-title">Cutting CI feedback from three hours to 25 minutes</h2>
+            <p>
+              A successful API request could still leave the wrong value in the
+              database. I checked both the response and the stored data.
+            </p>
+            <p>
+              I ran independent checks in parallel in Jenkins so developers
+              could get the regression results sooner.
+            </p>
+            <Link
+              className={styles.textLink}
+              href="/work/financial-data-quality-platform/"
+            >
+              Read the project <ArrowUpRight size={18} aria-hidden="true" />
+            </Link>
+          </div>
+          <figure className={styles.ciFigure}>
+            <div className={styles.figureHeading}>
+              <GitBranch size={17} aria-hidden="true" />
+              <span>Jenkins feedback time</span>
+            </div>
+            <div className={styles.timeComparison}>
+              <div>
+                <span>Before</span>
+                <strong>
+                  3<span>h</span>
+                </strong>
+              </div>
+              <ArrowRight
+                className={styles.timeArrow}
+                size={32}
+                aria-hidden="true"
+              />
+              <div>
+                <span>After</span>
+                <strong className={styles.timeAfter}>
+                  25<span>m</span>
+                </strong>
+              </div>
+            </div>
+            <div
+              className={styles.executionDiagram}
+              aria-label="Parallel API and data checks feed a shared release result"
+            >
+              <span className={styles.pipelineStart}>Run</span>
+              <div className={styles.parallelChecks}>
+                <span>API regression</span>
+                <span>Data validation</span>
+                <span>Access control</span>
+              </div>
+              <span className={styles.pipelineEnd}>
+                <Check size={16} aria-hidden="true" /> Result
+              </span>
+            </div>
+            <figcaption>
+              Illustrative pipeline. Feedback times are from the financial data
+              project.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section
+        className={`site-shell ${styles.projectList}`}
+        aria-label="More selected projects"
+      >
+        {projects.filter((project) => project.origin === "Project engagement").map((project) => (
+          <Link href={`/work/${project.slug}/`} key={project.slug} className={styles.projectRow}>
+            <div>
+              <span className={styles.origin}>{project.sector}</span>
+              <h3>{project.title}</h3>
+            </div>
+            <p>{project.summary}</p>
+            <ArrowUpRight size={24} aria-hidden="true" />
+          </Link>
+        ))}
+        <Link href="/work/" className={styles.textLink}>
+          All projects <ArrowRight size={17} aria-hidden="true" />
+        </Link>
+      </section>
+
+      <section
+        className={`site-shell ${styles.philosophy}`}
+        aria-labelledby="quality-title"
+      >
+        <div className={styles.philosophyCopy}>
+          <p className={styles.eyebrow}>Philosophy of quality</p>
+          <h2 id="quality-title">
+            An incomplete result should look incomplete.
+          </h2>
+          <p>
+            Missing inputs and stale data should be visible before a system can
+            report a complete result.
+          </p>
+          <p>
+            My personal health dashboard withholds its overall score when
+            required inputs are missing.
+          </p>
+          <Link className={styles.textLink} href="/work/health-dashboard/">
+            See the product decisions{" "}
+            <ArrowUpRight size={18} aria-hidden="true" />
+          </Link>
+        </div>
+        <figure className={styles.dashboardFigure}>
+          <div className={styles.dashboardTop}>
+            <span>Health overview</span>
+            <span className={styles.partial}>Partial data</span>
+          </div>
+          <div className={styles.dashboardScore}>
+            <span>Overall score</span>
+            <strong>Not calculated</strong>
+            <p>Some required inputs are missing.</p>
+          </div>
+          <dl className={styles.dataRows}>
+            <div>
+              <dt>Lab results</dt>
+              <dd>
+                <Check size={14} aria-hidden="true" /> Available
+              </dd>
+            </div>
+            <div>
+              <dt>Wearable history</dt>
+              <dd>Incomplete</dd>
+            </div>
+            <div>
+              <dt>Data freshness</dt>
+              <dd>Review needed</dd>
+            </div>
+          </dl>
+          <div className={styles.dashboardNotice}>
+            The individual measurements are still available.
+          </div>
+          <figcaption>Illustration with synthetic data.</figcaption>
+        </figure>
+      </section>
+
+      <section
+        className={`site-shell ${styles.devops}`}
+        aria-labelledby="devops-title"
+      >
+        <div className={styles.sectionIntro}>
+          <p className={styles.eyebrow}>DevOps and release engineering</p>
+          <h2 id="devops-title">Which checks run before release?</h2>
+          <p>
+            I split checks by how quickly the team needs an answer and what a
+            missed failure would cost.
+          </p>
+        </div>
+        <div className={styles.stageGrid}>
+          <article>
+            <span className={styles.stageLabel}>On a change</span>
+            <h3>Test the changed behavior</h3>
+            <p>
+              Run the smallest check that can catch the fault. If an API
+              returns the wrong value, a developer can investigate it without
+              replaying a browser session.
+            </p>
+          </article>
+          <article>
+            <span className={styles.stageLabel}>Before a release</span>
+            <h3>Follow a critical journey</h3>
+            <p>
+              Follow a request across the application. Check who can make it,
+              what the service returns and what reaches the database.
+            </p>
+          </article>
+          <article>
+            <span className={styles.stageLabel}>On a schedule</span>
+            <h3>Run the broader suite</h3>
+            <p>
+              Longer regression runs can cover more markets and environments.
+              A failure here still needs an owner, even if the latest change passed.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section
+        className={`site-shell ${styles.demo}`}
+        aria-labelledby="demo-title"
+      >
+        <div className={styles.demoIntro}>
+          <p className={styles.eyebrow}>Try the demos</p>
+          <h2 id="demo-title">Change the inputs. Inspect the checks.</h2>
+          <p>
+            Two working examples with synthetic data, running in your browser.
+          </p>
+        </div>
+        <article>
+          <h3>Model output release gate</h3>
+          <p>
+            Change test cases and the pass threshold, then inspect which
+            model-output failures block a release.
+          </p>
+          <Link href="/demos/eval-gate/" className={styles.demoLink}>
+            <Play size={20} aria-hidden="true" />
+            Run the eval gate
+            <ArrowUpRight size={20} aria-hidden="true" />
+          </Link>
+        </article>
+        <article>
+          <h3>Registration checks</h3>
+          <p>
+            Start a fictional signup and wait for an email or SMS code. See
+            how registration can succeed even when message delivery is late.
+          </p>
+          <Link href="/demos/registration-checks/" className={styles.demoLink}>
+            <Play size={20} aria-hidden="true" />
+            Try registration checks
+            <ArrowUpRight size={20} aria-hidden="true" />
+          </Link>
+        </article>
+      </section>
+
+      <section
+        className={`site-shell ${styles.aboutStrip}`}
+        aria-labelledby="about-title"
+      >
+        <h2 id="about-title">About Vin Rao</h2>
+        <div>
+          <p>
+            I studied physics at Hamilton College. Around nine years in quality
+            engineering and product development taught me to follow a failure
+            beyond the first symptom.
+          </p>
+          <Link className={styles.textLink} href="/about/">
+            More about me <ArrowRight size={17} aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
+
+      <section
+        className={`site-shell ${styles.contact}`}
+        aria-labelledby="contact-title"
+      >
+        <h2 id="contact-title">Discuss your project</h2>
+        <a className={styles.contactLink} href={`mailto:${siteConfig.email}`}>
+          Tell me what&apos;s slowing you down{" "}
+          <ArrowUpRight size={28} aria-hidden="true" />
+        </a>
+        <Link href="/contact/" className={styles.contactAlternative}>
+          Or put together a project brief{" "}
+          <ArrowRight size={15} aria-hidden="true" />
+        </Link>
+      </section>
+    </div>
   );
 }

@@ -13,12 +13,12 @@ export function buildMetadata({
   title,
   description,
   path = "/",
-  image = "/og/glyphknit-og.svg"
+  image = "/og/glyphknit-og.png"
 }: MetadataInput): Metadata {
   const pageTitle = title
-    ? `${title} | ${siteConfig.name} - ${siteConfig.primaryTitle}`
-    : `${siteConfig.name} - ${siteConfig.primaryTitle}`;
-  const url = new URL(path, siteConfig.canonicalUrl).toString();
+    ? `${title} | GlyphKnit`
+    : "GlyphKnit | Test systems and release engineering";
+  const url = new URL(path.endsWith("/") ? path : `${path}/`, siteConfig.canonicalUrl).toString();
   const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
   return {
@@ -39,7 +39,7 @@ export function buildMetadata({
           url: image,
           width: 1200,
           height: 630,
-          alt: `${siteConfig.name} portfolio preview`
+          alt: "GlyphKnit. Test systems and release pipelines."
         }
       ],
       locale: "en_US",

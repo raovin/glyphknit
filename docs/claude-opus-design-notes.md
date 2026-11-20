@@ -128,24 +128,11 @@ Tagline: *"You get working software, docs, and a clean hand-off — not a depend
 
 ---
 
-## 4. What needs Vin's approval (do not ship without sign-off)
+## 4. Public attribution
 
-1. **Naming clients.** The prototype softens to "connected-device platform (engagement via
-   emagine Consulting)" and "global beverage brand" rather than printing *Philip Morris
-   International* and *Carlsberg* on a marketing site. Naming PMI especially may be a
-   reputational call. **Decision needed:** name them, soften them (current), or drop names entirely.
-2. **The consulting framing of 2024–2025 emagine roles.** The resume lists these as
-   employment via emagine Consulting. The brief says treat post-Nov-2022 as consulting/project
-   work. The prototype frames them as "Consulting · embedded" engagements under the GlyphKnit
-   umbrella. Vin must be comfortable representing it this way to clients.
-3. **Contact details.** Email `3vineeth@gmail.com` and `github.com/raovin` are from the resume.
-   `linkedin.rao.vin` is the resume's vanity string and currently links to `#` — confirm the
-   real LinkedIn URL. Resume also lists phone `+1 438-738-0933`; intentionally **omitted** from
-   the prototype (public site) — add back only if Vin wants it.
-4. **"Open for work" status badge.** Fine while job-hunting; may want to drop once booked.
-5. **Metric attribution.** Numbers are real but tied to specific past employers — confirm
-   they're comfortable presented under the freelance banner.
-6. **Entity suffix.** "GlyphKnit Solutions LLC" vs "Solutions" — match the actual registration.
+The [current positioning guide](positioning.md) governs attribution, employment
+dates and anonymization. Use the company type when describing a client and use
+the project record to establish who did the work.
 
 ---
 

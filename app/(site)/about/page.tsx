@@ -1,77 +1,71 @@
+import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
+import Link from "next/link";
 
-import { ExperienceTimeline } from "@/components/experience-timeline";
-import { Section } from "@/components/section";
-import { experience } from "@/content/experience";
-import { primaryStack, siteConfig } from "@/content/site";
+import { siteConfig } from "@/content/site";
 import { buildMetadata } from "@/lib/metadata";
 
+import styles from "../home.module.css";
+
 export const metadata: Metadata = buildMetadata({
-  title: "About",
+  title: "About Vin Rao",
   description:
-    "About Vin Rao, a Senior SDET and ML-quality engineer with a background in QA automation, full-stack side projects, CI/CD testing, data validation, and ML quality.",
-  path: "/about"
+    "I'm Vin Rao, the engineer behind GlyphKnit. My work connects test automation, application code, data validation, and release pipelines.",
+  path: "/about",
 });
 
 export default function AboutPage() {
   return (
-    <>
-      <section className="reading-shell py-16 md:py-24">
-        <p className="mono-label">About</p>
-        <h1 className="mt-4 text-4xl md:text-5xl">
-          Quality engineering, product code, and clearer release evidence.
+    <div className="site-shell">
+      <section className={styles.innerHero}>
+        <p className={styles.eyebrow}>About</p>
+        <h1>
+          I&apos;m Vin Rao.
+          <br />
+          GlyphKnit is my independent practice.
         </h1>
-        <p className="mt-5 text-lg text-[var(--muted)]">
-          {siteConfig.name} is a Senior SDET / ML Quality Engineer based in Lisbon
-          time, with nine years across Playwright, pytest, Selenium, Cypress,
-          API testing, data validation, CI/CD gates, AWS, Azure, and .NET BDD.
+        <p>
+          I build test systems and release pipelines, and write the application
+          code on both sides of them.
         </p>
       </section>
-
-      <Section>
-        <div className="grid gap-5 md:grid-cols-[1fr_0.75fr]">
-          <article className="hairline-card p-6">
-            <h2 className="text-2xl">Background</h2>
-            <div className="mt-5 grid gap-4 text-[var(--muted)]">
-              <p>
-                The resume backs a specific shape of engineer: someone who can build
-                UI automation, API suites, data checks, CI gates, and support scripts,
-                then explain the failure in terms a delivery team can act on.
-              </p>
-              <p>
-                The Hamilton College background was Physics, with Computer Science,
-                Mathematics, History, and Piano alongside it. That mix shows up in
-                the way the work moves between systems thinking, scripts, data,
-                and readable release evidence.
-              </p>
-              <p>
-                Recent personal projects extend that pattern into ML and data systems:
-                eval cases, structured output checks, reproducible local harnesses,
-                and dashboards that avoid false precision.
-              </p>
-            </div>
-          </article>
-          <aside className="hairline-card p-6">
-            <h2 className="text-2xl">Current signal</h2>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {primaryStack.map((item) => (
-                <span className="chip" key={item}>
-                  {item}
-                </span>
-              ))}
-            </div>
-            <p className="mt-5 text-sm text-[var(--muted)]">
-              Resume PDF is served from the current SDET build. Client names stay
-              anonymized on the public site when the work is covered by agency,
-              client, or private-source boundaries.
-            </p>
-          </aside>
-        </div>
-      </Section>
-
-      <Section eyebrow="Resume timeline" title="Experience receipts">
-        <ExperienceTimeline items={experience} />
-      </Section>
-    </>
+      <div className={styles.proseLayout}>
+        <article className={styles.prose}>
+          <h2>From physics to software quality</h2>
+          <p>
+            I earned a BA in physics at Hamilton College. I also studied
+            computer science, mathematics, history, and piano.
+          </p>
+          <p>
+            In a financial data project, a successful request told me that the
+            API had answered. To find out whether the transformation worked, I
+            also checked what reached the database. That distinction shapes
+            how I write tests.
+          </p>
+          <h2>Why I build products, too</h2>
+          <p>
+            Building my <Link className="focus-link" href="/work/health-dashboard/">health dashboard</Link> forced me to decide what to show when a measurement was missing or out of date.
+            I wrote those cases into the scoring tests.
+          </p>
+          <Link className={styles.textLink} href="/work/">
+            Explore the projects <ArrowRight size={17} aria-hidden="true" />
+          </Link>
+        </article>
+        <aside className={styles.aside}>
+          <h2>Working with me</h2>
+          <p>
+            Start with the problem, the current system, and the first outcome
+            that would make a difference.
+          </p>
+          <Link className={styles.textLink} href="/contact/">
+            Discuss a project <ArrowRight size={17} aria-hidden="true" />
+          </Link>
+          <p>For my employment history and education:</p>
+          <Link className={styles.textLink} href={siteConfig.resumePageHref}>
+            View my resume <ArrowRight size={17} aria-hidden="true" />
+          </Link>
+        </aside>
+      </div>
+    </div>
   );
 }

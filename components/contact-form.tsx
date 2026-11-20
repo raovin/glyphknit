@@ -8,8 +8,7 @@ import { useRef, useState } from "react";
 import { siteConfig } from "@/content/site";
 import { buildInquiryDraft, type InquiryProject } from "@/lib/contact-inquiry";
 
-const fieldClass =
-  "mt-2 w-full rounded-md border border-[var(--line)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--paper)] outline-none transition placeholder:text-[var(--faint)] focus:border-[var(--accent)]";
+const fieldClass = "field";
 
 export function ContactInquiryForm({ projects }: { projects: InquiryProject[] }) {
   const searchParams = useSearchParams();
@@ -70,22 +69,22 @@ export function ContactForm({ relatedProject, nativeOnly = false }: { relatedPro
       action={`mailto:${siteConfig.email}`}
       method="post"
       encType="text/plain"
-      className="border border-[var(--line)] bg-[var(--surface)] p-6 md:p-8"
+      className="border border-line bg-surface p-6 sm:p-8 md:p-10"
       onSubmit={handleSubmit}
       onChange={() => setCopyStatus((status) => status === "copied" ? "idle" : status)}
       ref={formRef}
     >
-      <h2 className="text-2xl font-medium tracking-[-0.03em]">
+      <h2 className="display-3">
         Project inquiry
       </h2>
-      <p className="mt-3 text-xs text-[var(--muted)]">
+      <p className="mt-3 text-[0.875rem] text-muted">
         {nativeOnly ? "Open a draft in your email app." : "Open a draft in your email app, or copy it into webmail."} You send the email yourself.
       </p>
       {relatedProject && includeProject && (
-        <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border border-[var(--line)] p-3 text-sm">
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-l-2 border-accent bg-raised/60 py-2 pl-4 pr-2 text-[0.9375rem] text-ink">
           <p>Related project: {relatedProject.title}</p>
           <button
-            className="min-h-11 px-2 text-[var(--muted)] underline underline-offset-4 hover:text-[var(--paper)]"
+            className="min-h-11 px-2 text-[0.875rem] text-muted underline underline-offset-4 hover:text-ink"
             onClick={() => {
               setIncludeProject(false);
               setCopyStatus((status) => status === "copied" ? "idle" : status);
@@ -96,8 +95,8 @@ export function ContactForm({ relatedProject, nativeOnly = false }: { relatedPro
           </button>
         </div>
       )}
-      <div className="mt-5 grid gap-4">
-        <label className="text-sm font-semibold text-[var(--paper)]">
+      <div className="mt-8 grid gap-6">
+        <label className="block text-[0.875rem] font-medium text-ink">
           Project or problem (required)
           <input
             className={fieldClass}
@@ -114,7 +113,7 @@ export function ContactForm({ relatedProject, nativeOnly = false }: { relatedPro
             value={problem}
           />
         </label>
-        <label className="text-sm font-semibold text-[var(--paper)]">
+        <label className="block text-[0.875rem] font-medium text-ink">
           Stack or context
           <input
             className={fieldClass}
@@ -125,7 +124,7 @@ export function ContactForm({ relatedProject, nativeOnly = false }: { relatedPro
             value={stack}
           />
         </label>
-        <label className="text-sm font-semibold text-[var(--paper)]">
+        <label className="block text-[0.875rem] font-medium text-ink">
           Timing
           <input
             className={fieldClass}
@@ -136,7 +135,7 @@ export function ContactForm({ relatedProject, nativeOnly = false }: { relatedPro
             value={timing}
           />
         </label>
-        <label className="text-sm font-semibold text-[var(--paper)]">
+        <label className="block text-[0.875rem] font-medium text-ink">
           Details
           <textarea
             className={`${fieldClass} min-h-36 resize-y`}
@@ -147,16 +146,16 @@ export function ContactForm({ relatedProject, nativeOnly = false }: { relatedPro
           />
         </label>
       </div>
-      <div className="mt-6 flex flex-wrap gap-3">
+      <div className="mt-8 flex flex-wrap gap-3">
         <button
-          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-[var(--accent)] bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-ink)] transition hover:bg-[var(--accent-strong)]"
+          className="btn btn-primary"
           type="submit"
         >
           <Mail aria-hidden="true" size={17} />
           Open email draft
         </button>
         {!nativeOnly && <button
-          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-[var(--line)] px-4 py-2 text-sm font-semibold text-[var(--paper)] transition hover:border-[var(--accent)]"
+          className="btn btn-secondary"
           onClick={copyInquiry}
           type="button"
         >
@@ -164,14 +163,14 @@ export function ContactForm({ relatedProject, nativeOnly = false }: { relatedPro
           Copy inquiry
         </button>}
       </div>
-      <p aria-live="polite" className="mt-3 text-sm text-[var(--muted)]" role="status">
+      <p aria-live="polite" className="mt-3 text-[0.875rem] text-muted" role="status">
         {copyStatus === "copied" && "Inquiry copied, including the email address."}
         {copyStatus === "manual" &&
           "Copy is unavailable here. Select the draft below and copy it into your email app."}
       </p>
       {copyStatus === "manual" && (
         <div className="mt-4 text-sm">
-          <label className="font-semibold text-[var(--paper)]" htmlFor="inquiry-draft">Inquiry draft, including recipient and subject</label>
+          <label className="text-[0.875rem] font-medium text-ink" htmlFor="inquiry-draft">Inquiry draft, including recipient and subject</label>
           <textarea
             id="inquiry-draft"
             className={`${fieldClass} min-h-64 resize-y font-mono font-normal`}
@@ -182,7 +181,7 @@ export function ContactForm({ relatedProject, nativeOnly = false }: { relatedPro
         </div>
       )}
       <noscript>
-        <p className="mt-4 text-sm text-[var(--muted)]">
+        <p className="mt-4 text-[0.875rem] text-muted">
           JavaScript is off. Open email draft will use your email app, or email{" "}
           <a className="underline" href={`mailto:${siteConfig.email}`}>
             {siteConfig.email}

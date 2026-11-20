@@ -4,8 +4,12 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 import { Analytics } from "@/components/analytics";
+import { MotionProvider } from "@/components/motion-provider";
 import { siteConfig } from "@/content/site";
 import { buildMetadata } from "@/lib/metadata";
+import { themeBootScript } from "@/lib/theme";
+
+import { fontVariables } from "./fonts";
 
 export const metadata: Metadata = buildMetadata({
   description: siteConfig.description
@@ -14,10 +18,10 @@ export const metadata: Metadata = buildMetadata({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  colorScheme: "dark light",
+  colorScheme: "light dark",
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#090b0c" },
-    { media: "(prefers-color-scheme: light)", color: "#f6f8f7" }
+    { media: "(prefers-color-scheme: light)", color: "#f4f2ed" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e1312" }
   ]
 };
 
@@ -34,14 +38,17 @@ const companyJsonLd = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html className={fontVariables} lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
+      </head>
       <body>
         <script
           dangerouslySetInnerHTML={{ __html: JSON.stringify(companyJsonLd).replace(/</g, "\\u003c") }}
           type="application/ld+json"
         />
         <Analytics />
-        {children}
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );

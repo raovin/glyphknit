@@ -39,7 +39,7 @@ export function buildMetadata({
           url: image,
           width: 1200,
           height: 630,
-          alt: "GlyphKnit. Test systems and release pipelines."
+          alt: "GlyphKnit builds test systems and release pipelines."
         }
       ],
       locale: "en_US",
